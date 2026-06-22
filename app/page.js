@@ -112,6 +112,9 @@ export default function Home() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "作品生成接口请求失败");
       setArtwork(data);
+      if (data.work?.inputText) {
+        setForm((current) => ({ ...current, text: data.work.inputText }));
+      }
       await loadWorks();
     } catch (error) {
       setNotice(error.message);
@@ -325,7 +328,7 @@ export default function Home() {
             <div className="promptBox">
               <h3>作品说明</h3>
               <div className="metaGrid">
-                <span>内容：{form.text.replace("\n", " / ")}</span>
+                <span>内容：{(artwork?.work?.inputText || form.text).replace("\n", " / ")}</span>
                 <span>书体：{form.script}</span>
                 <span>风格：{form.master}</span>
                 <span>形式：{form.format}</span>
@@ -333,7 +336,7 @@ export default function Home() {
               <h3>图片生成提示词</h3>
               <p>{artwork?.prompt || "生成后将在这里显示自动组合的图片提示词，后续可直接传给真实图片模型。"}</p>
               {artwork?.imageUrl && (
-                <a className="download" href={artwork.imageUrl} download={`墨韵智创-${form.text}.svg`}>
+                <a className="download" href={artwork.imageUrl} download={`墨韵智创-${artwork?.work?.inputText || form.text}.png`}>
                   <Download size={18} />
                   下载图片
                 </a>

@@ -1,4 +1,4 @@
-import { buildImagePrompt, createMockArtworkSvg, formats, masters, scripts } from "@/lib/calligraphy";
+import { buildImagePrompt, createMockArtworkSvg, formats, masters, normalizeCalligraphyText, scripts } from "@/lib/calligraphy";
 import { saveWork } from "@/lib/db";
 import { generateCalligraphyImage } from "@/lib/model-providers";
 
@@ -6,12 +6,13 @@ export const runtime = "nodejs";
 
 export async function POST(request) {
   const body = await request.json();
-  const text = String(body.text || "").trim();
+  const rawText = String(body.text || "").trim();
+  const text = normalizeCalligraphyText(rawText);
   const script = String(body.script || "楷书").trim();
   const master = String(body.master || "王羲之").trim();
   const format = String(body.format || "中堂").trim();
 
-  if (!text) {
+  if (!rawText) {
     return Response.json({ error: "请输入想生成的书法内容。" }, { status: 400 });
   }
 
