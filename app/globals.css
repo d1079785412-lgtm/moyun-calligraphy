@@ -80,6 +80,10 @@ textarea {
   resize: vertical;
 }
 
+.compactText {
+  min-height: 42px;
+}
+
 label {
   color: var(--ink-soft);
   display: grid;
@@ -184,6 +188,47 @@ h1 {
   margin: 0;
 }
 
+.quickStart {
+  padding-bottom: 18px;
+}
+
+.presetGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.presetCard {
+  align-items: start;
+  background: rgba(255, 250, 240, 0.72);
+  border-color: rgba(215, 199, 170, 0.9);
+  color: var(--ink);
+  display: grid;
+  gap: 7px;
+  justify-content: start;
+  min-height: 112px;
+  padding: 14px;
+  text-align: left;
+}
+
+.presetCard:hover {
+  background: var(--white);
+}
+
+.presetCard strong {
+  color: var(--seal-dark);
+  font-size: 17px;
+}
+
+.presetCard span {
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.presetCard small {
+  color: var(--ink-soft);
+}
+
 .stack {
   display: grid;
   gap: 14px;
@@ -215,6 +260,66 @@ h1 {
   margin-top: 16px;
   min-height: 118px;
   padding: 15px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chip {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-soft);
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.chip:hover {
+  background: rgba(234, 223, 201, 0.55);
+  color: var(--ink);
+}
+
+.hintBox {
+  background: rgba(255, 250, 240, 0.72);
+  border-left: 3px solid var(--seal);
+  color: var(--ink-soft);
+  display: grid;
+  gap: 6px;
+  line-height: 1.7;
+  margin-top: 14px;
+  padding: 12px 14px;
+}
+
+.hintBox strong {
+  color: var(--ink);
+}
+
+.selectionNotes {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+.selectionNotes div {
+  background: rgba(234, 223, 201, 0.34);
+  border: 1px solid rgba(215, 199, 170, 0.72);
+  border-radius: 6px;
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+}
+
+.selectionNotes strong {
+  color: var(--seal-dark);
+}
+
+.selectionNotes span {
+  color: var(--ink-soft);
+  line-height: 1.6;
 }
 
 .notice {
@@ -274,18 +379,51 @@ h1 {
   margin: 0;
 }
 
+.generating {
+  align-items: center;
+  color: var(--ink-soft);
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+
+.generating svg {
+  color: var(--seal);
+}
+
+.generating strong {
+  color: var(--ink);
+  font-size: 20px;
+}
+
 .promptBox {
   margin-top: 0;
 }
 
 .promptBox h3 {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 
 .promptBox p {
   line-height: 1.9;
   margin-bottom: 18px;
+}
+
+.metaGrid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.metaGrid span {
+  background: rgba(255, 250, 240, 0.7);
+  border: 1px solid rgba(215, 199, 170, 0.7);
+  border-radius: 6px;
+  color: var(--ink-soft);
+  padding: 8px 10px;
 }
 
 .download {
@@ -361,12 +499,17 @@ h1 {
 @media (max-width: 940px) {
   .grid.two,
   .resultGrid,
-  .generateForm {
+  .generateForm,
+  .selectionNotes {
     grid-template-columns: 1fr;
   }
 
   .historyGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .presetGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -398,5 +541,10 @@ h1 {
 
   .historyGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .presetGrid,
+  .metaGrid {
+    grid-template-columns: 1fr;
   }
 }
