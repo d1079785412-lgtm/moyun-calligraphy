@@ -25,7 +25,7 @@ export async function POST(request) {
   let imageUrl;
 
   try {
-    const generated = await generateCalligraphyImage({ prompt, format });
+    const generated = await generateCalligraphyImage({ prompt, format, script });
     provider = generated.provider;
     imageUrl = generated.imageUrl;
   } catch (error) {
