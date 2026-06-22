@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>墨韵智创——AI辅助书法生成艺术平台</title>
+    <style>
+      :root {
+        --paper: #f5efe2;
+        --paper-deep: #eadfc9;
+        --ink: #171310;
+        --ink-soft: #4a4038;
+        --line: #d7c7aa;
+        --seal: #a3261d;
+        --seal-dark: #7e1b15;
+        --white: #fffaf0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+      }
+      button, input, select, textarea { font: inherit; }
+      button, .download {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 42px;
+        padding: 10px 16px;
+        border: 1px solid var(--ink);
+        border-radius: 6px;
+        background: var(--ink);
+        color: var(--white);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      input, select, textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: rgba(255, 250, 240, 0.82);
+        color: var(--ink);
+      }
+      textarea { min-height: 112px; resize: vertical; }
+      label { display: grid; gap: 7px; color: var(--ink-soft); font-size: 14px; }
+      .hero {
+        border-bottom: 1px solid var(--line);
+        background:
+          linear-gradient(90deg, rgba(245, 239, 226, 0.96), rgba(245, 239, 226, 0.82)),
+          repeating-linear-gradient(90deg, rgba(128, 89, 44, 0.08) 0 1px, transparent 1px 46px);
+      }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 28px;
+        align-items: center;
+        max-width: 1160px;
+        min-height: 310px;
+        margin: 0 auto;
+        padding: 48px 24px 42px;
+      }
+      .seal-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 132px;
+        height: 132px;
+        background: var(--seal);
+        color: #f9ead7;
+        font-family: KaiTi, STKaiti, serif;
+        font-size: 74px;
+      }
+      .eyebrow { color: var(--seal-dark); margin: 0 0 14px; }
+      h1 { max-width: 980px; margin: 0 0 18px; font-size: clamp(34px, 7vw, 68px); line-height: 1.12; }
+      h2, h3, p { margin-top: 0; }
+      .intro { max-width: 720px; margin: 0; color: var(--ink-soft); font-size: 19px; line-height: 1.8; }
+      .workspace { display: grid; gap: 22px; max-width: 1160px; margin: 0 auto; padding: 26px 24px 56px; }
+      .grid-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+      .panel { padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 250, 240, 0.72); }
+      .panel-title { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+      .panel-title h2 { margin: 0; font-size: 21px; }
+      .stack { display: grid; gap: 14px; }
+      .inline-fields, .generate-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .generate-form { align-items: end; grid-template-columns: 1.5fr repeat(3, 1fr) auto; }
+      .answer-box, .prompt-box {
+        min-height: 118px;
+        margin-top: 16px;
+        padding: 15px;
+        border: 1px solid rgba(215, 199, 170, 0.76);
+        border-radius: 6px;
+        background: rgba(234, 223, 201, 0.45);
+        color: var(--ink-soft);
+        line-height: 1.8;
+      }
+      .result-grid { display: grid; grid-template-columns: minmax(280px, 0.82fr) 1fr; gap: 20px; margin-top: 20px; }
+      .art-preview { display: flex; align-items: center; justify-content: center; min-height: 430px; padding: 16px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #efe3cd; }
+      .art-preview img { max-width: 100%; max-height: 590px; object-fit: contain; }
+      .empty-art { display: grid; gap: 12px; justify-items: center; color: var(--ink-soft); }
+      .empty-art span { width: 122px; height: 122px; border: 2px solid var(--seal); color: var(--seal); font-family: KaiTi, STKaiti, serif; font-size: 76px; line-height: 116px; text-align: center; }
+      .advice-list { display: grid; gap: 10px; margin: 16px 0 0; }
+      .advice-list div { display: grid; grid-template-columns: 56px 1fr; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid rgba(215, 199, 170, 0.72); }
+      .advice-list dt { color: var(--seal-dark); font-weight: 700; }
+      .advice-list dd { margin: 0; color: var(--ink-soft); line-height: 1.7; }
+      .history-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+      .work-card { display: grid; gap: 8px; justify-items: start; padding: 10px; min-height: auto; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 250, 240, 0.78); color: var(--ink); text-align: left; }
+      .work-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border: 1px solid rgba(215, 199, 170, 0.8); border-radius: 5px; background: var(--paper-deep); }
+      .muted, .work-card small { color: var(--ink-soft); }
+      @media (max-width: 940px) {
+        .grid-two, .result-grid, .generate-form { grid-template-columns: 1fr; }
+        .history-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+      @media (max-width: 640px) {
+        .hero-inner { grid-template-columns: 1fr; padding: 38px 18px 34px; }
+        .seal-mark { width: 86px; height: 86px; font-size: 48px; }
+        .workspace { padding: 18px 14px 40px; }
+        .panel { padding: 16px; }
+        .inline-fields { grid-template-columns: 1fr; }
+        .history-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="seal-mark">墨</div>
+        <div>
+          <p class="eyebrow">产教实践展示 Demo</p>
+          <h1>墨韵智创——AI辅助书法生成艺术平台</h1>
+          <p class="intro">AI赋能书法知识学习、章法设计、作品生成与展示，辅助学习者理解传统书法并完成创作表达。</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <div class="grid-two">
+        <article class="panel">
+          <div class="panel-title"><h2>书法知识问答</h2></div>
+          <form id="chatForm" class="stack">
+            <textarea id="question">初学楷书应该怎样选择碑帖？</textarea>
+            <button type="submit">提交问题</button>
+          </form>
+          <div id="answer" class="answer-box">回答会显示在这里。本静态演示版使用浏览器内 mock 逻辑。</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-title"><h2>章法设计</h2></div>
+          <form id="layoutForm" class="stack">
+            <div class="inline-fields">
+              <label>创作文字<input id="layoutText" value="厚德载物" /></label>
+              <label>作品形式<select id="layoutFormat"></select></label>
+            </div>
+            <button type="submit">生成章法建议</button>
+          </form>
+          <div id="advice" class="answer-box">章法建议会包含字距、行距、落款位置、印章位置和整体布局。</div>
+        </article>
+      </div>
+
+      <article class="panel">
+        <div class="panel-title"><h2>AI书法作品生成</h2></div>
+        <form id="generateForm" class="generate-form">
+          <label>生成文字<input id="text" value="厚德载物" maxlength="24" /></label>
+          <label>书体<select id="script"></select></label>
+          <label>风格参考<select id="master"></select></label>
+          <label>作品形式<select id="format"></select></label>
+          <button type="submit">生成作品</button>
+        </form>
+        <div class="result-grid">
+          <div class="art-preview" id="artPreview"><div class="empty-art"><span>墨</span><p>楷书 · 颜真卿 · 中堂</p></div></div>
+          <div class="prompt-box">
+            <h3>图片生成提示词</h3>
+            <p id="prompt">生成后将在这里显示自动组合的图片提示词。</p>
+            <a id="download" class="download" href="#" download="墨韵智创.svg" style="display:none">下载图片</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-title"><h2>历史作品</h2></div>
+        <div id="history" class="history-grid"><p class="muted">暂无生成记录。</p></div>
+      </article>
+    </main>
+
+    <script>
+      const scripts = ["楷书", "行书", "草书", "隶书", "篆书"];
+      const masters = ["王羲之", "颜真卿", "柳公权", "欧阳询", "褚遂良", "米芾", "赵孟頫"];
+      const formats = ["中堂", "条幅", "横幅", "对联", "扇面"];
+      const keywords = ["书法","书体","楷书","行书","草书","隶书","篆书","碑帖","临摹","章法","笔法","墨法","结字","落款","印章","王羲之","颜真卿","柳公权","欧阳询","褚遂良","米芾","赵孟頫"];
+      const $ = (id) => document.getElementById(id);
+
+      function fillSelect(id, items, selected) {
+        $(id).innerHTML = items.map((item) => `<option ${item === selected ? "selected" : ""}>${item}</option>`).join("");
+      }
+      fillSelect("script", scripts, "楷书");
+      fillSelect("master", masters, "颜真卿");
+      fillSelect("format", formats, "中堂");
+      fillSelect("layoutFormat", formats, "中堂");
+
+      function escapeXml(value) {
+        return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      }
+      function promptOf(text, script, master, format) {
+        return `生成一幅中国传统书法作品，内容为“${text}”，书体为${script}，风格参考${master}，作品形式为${format}。使用宣纸质感，黑色墨迹，自然飞白，传统落款，朱红印章。整体章法端正，墨色有浓淡变化，画面干净，适合书法艺术展示。注意保持中文字形准确，不要生成乱码，不要添加无关文字。`;
+      }
+      function svgOf(text, script, master, format) {
+        const chars = Array.from(text || "墨韵智创").slice(0, 24);
+        const horizontal = format === "横幅";
+        const width = horizontal ? 1200 : 820;
+        const height = horizontal ? 620 : 1080;
+        const size = horizontal ? 94 : 86;
+        const content = [];
+        if (horizontal) {
+          const startX = width / 2 - (chars.length - 1) * size * 0.47;
+          chars.forEach((char, i) => content.push(`<text x="${startX + i * size * 0.94}" y="${height / 2 + 28}" class="main">${escapeXml(char)}</text>`));
+        } else {
+          const rows = Math.ceil(chars.length / Math.max(1, Math.ceil(chars.length / 8)));
+          chars.forEach((char, i) => {
+            const column = Math.floor(i / rows);
+            const row = i % rows;
+            content.push(`<text x="${width * 0.68 - column * size * 1.06}" y="${180 + row * size * 1.08}" class="main">${escapeXml(char)}</text>`);
+          });
+        }
+        return `<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><style>.main{font-family:KaiTi,STKaiti,SimSun,serif;font-size:${size}px;fill:#17120f;text-anchor:middle;dominant-baseline:middle}.sub{font-family:KaiTi,STKaiti,serif;font-size:30px;fill:#2b2520;writing-mode:tb}</style><rect width="100%" height="100%" fill="#f4eedf"/><rect x="34" y="34" width="${width - 68}" height="${height - 68}" fill="none" stroke="#d8c8aa" stroke-width="2"/><g>${content.join("")}</g><text x="${horizontal ? width - 270 : 112}" y="${horizontal ? height - 118 : height - 365}" class="sub">AI摹${escapeXml(master)}意</text><rect x="${horizontal ? width - 160 : 130}" y="${horizontal ? height - 150 : height - 190}" width="78" height="78" fill="#a62319"/><text x="${horizontal ? width - 121 : 169}" y="${horizontal ? height - 132 : height - 172}" font-family="KaiTi,STKaiti,serif" font-size="22" fill="#f8ead6" text-anchor="middle"><tspan x="${horizontal ? width - 121 : 169}" dy="22">墨韵</tspan><tspan x="${horizontal ? width - 121 : 169}" dy="26">智创</tspan></text></svg>`;
+      }
+      function adviceOf(text, format) {
+        const count = Array.from(text || "").length;
+        const overall = {
+          中堂: "采用竖向居中布局，正文宜占画面中轴，四周留白充足，适合庄重题材。",
+          条幅: "采用单列或双列竖排，行气要连贯，上紧下松，适合诗句、格言。",
+          横幅: "采用横向展开布局，字势保持水平节奏，左右留白要均衡。",
+          对联: "上下联字数、重心、行距保持一致，右联在右、左联在左，横批可置于上方。",
+          扇面: "顺应扇面弧线安排字势，外缘略疏、内缘略密，避免文字挤压。"
+        }[format];
+        return { 字距: count <= 4 ? "字距可略放宽，突出单字姿态。" : "字距宜均匀，长句可按语义小幅分组。", 行距: "行距略大于字距，保证竖行之间气息通畅。", 落款: "落款建议置于正文左侧偏下位置，字形略小。", 印章: "朱文或白文印可放在落款下方；若画面偏空，可在起首处加引首章平衡视觉。", 整体: overall };
+      }
+      function loadWorks() { return JSON.parse(localStorage.getItem("moyunWorks") || "[]"); }
+      function saveWorks(works) { localStorage.setItem("moyunWorks", JSON.stringify(works.slice(0, 30))); }
+      function renderHistory() {
+        const works = loadWorks();
+        $("history").innerHTML = works.length ? works.map((work, i) => `<button class="work-card" data-index="${i}"><img src="${work.imageUrl}" alt=""><span>${work.text}</span><small>${work.script} · ${work.master} · ${work.format}</small></button>`).join("") : '<p class="muted">暂无生成记录。</p>';
+        document.querySelectorAll(".work-card").forEach((card) => card.addEventListener("click", () => {
+          const work = works[Number(card.dataset.index)];
+          $("artPreview").innerHTML = `<img src="${work.imageUrl}" alt="AI生成书法作品">`;
+          $("prompt").textContent = work.prompt;
+          $("download").href = work.imageUrl;
+          $("download").style.display = "inline-flex";
+        }));
+      }
+      $("chatForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const q = $("question").value.trim();
+        $("answer").textContent = keywords.some((k) => q.includes(k)) ? `这是一个 mock 大模型回答：针对“${q}”，建议先从“观察、分解、临写、对照、复盘”五步入手。学习书法时可重点关注笔画起收、转折提按、结字重心、行气节奏和章法留白。` : "本平台主要服务书法学习与创作。你可以咨询书法史、书体、碑帖、名家、技法、章法或临摹方法等问题。";
+      });
+      $("layoutForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const advice = adviceOf($("layoutText").value.trim(), $("layoutFormat").value);
+        $("advice").outerHTML = `<dl id="advice" class="advice-list">${Object.entries(advice).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
+      });
+      $("generateForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const text = $("text").value.trim() || "厚德载物";
+        const script = $("script").value;
+        const master = $("master").value;
+        const format = $("format").value;
+        const prompt = promptOf(text, script, master, format);
+        const imageUrl = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgOf(text, script, master, format))));
+        $("artPreview").innerHTML = `<img src="${imageUrl}" alt="AI生成书法作品">`;
+        $("prompt").textContent = prompt;
+        $("download").href = imageUrl;
+        $("download").download = `墨韵智创-${text}.svg`;
+        $("download").style.display = "inline-flex";
+        const works = loadWorks();
+        works.unshift({ text, script, master, format, prompt, imageUrl, createdAt: new Date().toISOString() });
+        saveWorks(works);
+        renderHistory();
+      });
+      renderHistory();
+    </script>
+  </body>
+</html>
