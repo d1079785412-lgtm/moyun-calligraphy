@@ -1,0 +1,296 @@
+[
+  {
+    "page": "cs1_p01",
+    "expected": 120,
+    "assigned": 114,
+    "missing": 6
+  },
+  {
+    "page": "cs1_p02",
+    "expected": 120,
+    "assigned": 101,
+    "missing": 19
+  },
+  {
+    "page": "cs1_p03",
+    "expected": 120,
+    "assigned": 108,
+    "missing": 12
+  },
+  {
+    "page": "cs1_p04",
+    "expected": 120,
+    "assigned": 111,
+    "missing": 9
+  },
+  {
+    "page": "cs1_p05",
+    "expected": 120,
+    "assigned": 107,
+    "missing": 13
+  },
+  {
+    "page": "cs1_p06",
+    "expected": 120,
+    "assigned": 106,
+    "missing": 14
+  },
+  {
+    "page": "cs1_p07",
+    "expected": 120,
+    "assigned": 104,
+    "missing": 16
+  },
+  {
+    "page": "cs1_p08",
+    "expected": 120,
+    "assigned": 109,
+    "missing": 11
+  },
+  {
+    "page": "cs1_p09",
+    "expected": 120,
+    "assigned": 103,
+    "missing": 17
+  },
+  {
+    "page": "cs1_p10",
+    "expected": 120,
+    "assigned": 94,
+    "missing": 26
+  },
+  {
+    "page": "cs1_p11",
+    "expected": 120,
+    "assigned": 112,
+    "missing": 8
+  },
+  {
+    "page": "cs1_p12",
+    "expected": 120,
+    "assigned": 109,
+    "missing": 11
+  },
+  {
+    "page": "cs1_p13",
+    "expected": 120,
+    "assigned": 107,
+    "missing": 13
+  },
+  {
+    "page": "cs1_p14",
+    "expected": 120,
+    "assigned": 105,
+    "missing": 15
+  },
+  {
+    "page": "cs1_p15",
+    "expected": 120,
+    "assigned": 101,
+    "missing": 19
+  },
+  {
+    "page": "cs1_p16",
+    "expected": 120,
+    "assigned": 103,
+    "missing": 17
+  },
+  {
+    "page": "cs1_p17",
+    "expected": 120,
+    "assigned": 103,
+    "missing": 17
+  },
+  {
+    "page": "cs1_p18",
+    "expected": 120,
+    "assigned": 103,
+    "missing": 17
+  },
+  {
+    "page": "cs1_p19",
+    "expected": 120,
+    "assigned": 96,
+    "missing": 24
+  },
+  {
+    "page": "cs1_p20",
+    "expected": 120,
+    "assigned": 104,
+    "missing": 16
+  },
+  {
+    "page": "cs1_p21",
+    "expected": 120,
+    "assigned": 97,
+    "missing": 23
+  },
+  {
+    "page": "cs1_p22",
+    "expected": 120,
+    "assigned": 104,
+    "missing": 16
+  },
+  {
+    "page": "cs1_p23",
+    "expected": 120,
+    "assigned": 94,
+    "missing": 26
+  },
+  {
+    "page": "cs1_p24",
+    "expected": 120,
+    "assigned": 100,
+    "missing": 20
+  },
+  {
+    "page": "cs1_p25",
+    "expected": 120,
+    "assigned": 101,
+    "missing": 19
+  },
+  {
+    "page": "cs1_p26",
+    "expected": 120,
+    "assigned": 97,
+    "missing": 23
+  },
+  {
+    "page": "cs1_p27",
+    "expected": 120,
+    "assigned": 95,
+    "missing": 25
+  },
+  {
+    "page": "cs1_p28",
+    "expected": 120,
+    "assigned": 97,
+    "missing": 23
+  },
+  {
+    "page": "cs1_p29",
+    "expected": 120,
+    "assigned": 92,
+    "missing": 28
+  },
+  {
+    "page": "cs1_p30",
+    "expected": 120,
+    "assigned": 91,
+    "missing": 29
+  },
+  {
+    "page": "cs1_p31",
+    "expected": 120,
+    "assigned": 90,
+    "missing": 30
+  },
+  {
+    "page": "cs1_p32",
+    "expected": 120,
+    "assigned": 92,
+    "missing": 28
+  },
+  {
+    "page": "cs1_p33",
+    "expected": 120,
+    "assigned": 94,
+    "missing": 26
+  },
+  {
+    "page": "cs1_p34",
+    "expected": 120,
+    "assigned": 86,
+    "missing": 34
+  },
+  {
+    "page": "cs1_p35",
+    "expected": 120,
+    "assigned": 82,
+    "missing": 38
+  },
+  {
+    "page": "cs1_p36",
+    "expected": 120,
+    "assigned": 88,
+    "missing": 32
+  },
+  {
+    "page": "cs1_p37",
+    "expected": 120,
+    "assigned": 82,
+    "missing": 38
+  },
+  {
+    "page": "cs1_p38",
+    "expected": 120,
+    "assigned": 86,
+    "missing": 34
+  },
+  {
+    "page": "cs1_p39",
+    "expected": 120,
+    "assigned": 75,
+    "missing": 45
+  },
+  {
+    "page": "cs1_p40",
+    "expected": 120,
+    "assigned": 88,
+    "missing": 32
+  },
+  {
+    "page": "cs2_p01",
+    "expected": 29,
+    "assigned": 20,
+    "missing": 9
+  },
+  {
+    "page": "cs2_p02",
+    "expected": 120,
+    "assigned": 67,
+    "missing": 53
+  },
+  {
+    "page": "cs2_p03",
+    "expected": 120,
+    "assigned": 75,
+    "missing": 45
+  },
+  {
+    "page": "cs2_p04",
+    "expected": 120,
+    "assigned": 77,
+    "missing": 43
+  },
+  {
+    "page": "cs2_p05",
+    "expected": 120,
+    "assigned": 70,
+    "missing": 50
+  },
+  {
+    "page": "cs2_p06",
+    "expected": 120,
+    "assigned": 85,
+    "missing": 35
+  },
+  {
+    "page": "cs2_p07",
+    "expected": 120,
+    "assigned": 77,
+    "missing": 43
+  },
+  {
+    "page": "cs2_p08",
+    "expected": 120,
+    "assigned": 79,
+    "missing": 41
+  },
+  {
+    "page": "cs2_p09",
+    "expected": 120,
+    "assigned": 85,
+    "missing": 35
+  }
+]

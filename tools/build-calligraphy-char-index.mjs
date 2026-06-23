@@ -5,6 +5,7 @@ const [, , libraryId = "chusuiliang-kaishu"] = process.argv;
 const libraryDir = path.join(process.cwd(), "public", "calligraphy-libraries", libraryId);
 const sourcePath = path.join(libraryDir, "char-index-template.csv");
 const outputPath = path.join(libraryDir, "char-index.json");
+const calligraphyPath = path.join(process.cwd(), "lib", "calligraphy.js");
 
 function parseCsvLine(line) {
   const fields = [];
@@ -46,6 +47,23 @@ function splitAliases(value) {
     .filter(Boolean);
 }
 
+function loadTraditionalAliases() {
+  const aliases = new Map();
+  try {
+    const source = fs.readFileSync(calligraphyPath, "utf8");
+    const pattern = /^\s*([^:\s"'{}[\],]{1}):\s*"([^"]{1})",?\s*$/gmu;
+    let match;
+    while ((match = pattern.exec(source))) {
+      const simplified = match[1];
+      const traditional = match[2];
+      if (simplified !== traditional) aliases.set(simplified, traditional);
+    }
+  } catch {
+    // Optional convenience only; explicit aliases in CSV still work without it.
+  }
+  return aliases;
+}
+
 const csv = fs.readFileSync(sourcePath, "utf8").replace(/^\uFEFF/, "");
 const [headerLine, ...rows] = csv.split(/\r?\n/).filter(Boolean);
 const headers = parseCsvLine(headerLine);
@@ -60,6 +78,7 @@ if (charIndex === -1 || glyphIdIndex === -1) {
 
 const output = {};
 const conflicts = [];
+const traditionalAliases = loadTraditionalAliases();
 
 for (const row of rows) {
   const fields = parseCsvLine(row);
@@ -69,6 +88,11 @@ for (const row of rows) {
     ...splitAliases(simplifiedIndex === -1 ? "" : fields[simplifiedIndex]),
     ...splitAliases(aliasesIndex === -1 ? "" : fields[aliasesIndex]),
   ];
+
+  for (const key of [...keys]) {
+    const traditional = traditionalAliases.get(key);
+    if (traditional) keys.push(traditional);
+  }
 
   if (!glyphId || keys.length === 0) continue;
 
