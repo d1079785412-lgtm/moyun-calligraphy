@@ -1,0 +1,16 @@
+{
+  "id": "chusuiliang-kaishu",
+  "name": "褚遂良楷书本地字库",
+  "script": "楷书",
+  "master": "褚遂良",
+  "version": "2026-06-23-new-candidate-library",
+  "sourcePdfs": [
+    "褚遂良1.pdf",
+    "褚遂良2.pdf"
+  ],
+  "glyphCount": 5789,
+  "indexUrl": "/calligraphy-libraries/chusuiliang-kaishu/index.json",
+  "charIndexUrl": "/calligraphy-libraries/chusuiliang-kaishu/char-index.json",
+  "note": "只接入 5789 个新候选字库；旧 91 字库未纳入。char-index.json 需要人工校准后才能按正文自动拼字。",
+  "generatedAt": "2026-06-23T19:24:19+0800"
+}

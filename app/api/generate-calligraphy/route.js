@@ -1,5 +1,13 @@
-import { buildImagePrompt, createMockArtworkSvg, formats, masters, normalizeCalligraphyText, scripts } from "@/lib/calligraphy";
+import {
+  buildImagePrompt,
+  createMockArtworkSvg,
+  formats,
+  normalizeCalligraphyText,
+  normalizeScriptAndMaster,
+  scripts,
+} from "@/lib/calligraphy";
 import { saveWork } from "@/lib/db";
+import { tryGenerateLocalCalligraphy } from "@/lib/local-calligraphy-library";
 import { generateCalligraphyImage } from "@/lib/model-providers";
 
 export const runtime = "nodejs";
@@ -8,19 +16,35 @@ export async function POST(request) {
   const body = await request.json();
   const rawText = String(body.text || "").trim();
   const text = normalizeCalligraphyText(rawText);
-  const script = String(body.script || "楷书").trim();
-  const master = String(body.master || "王羲之").trim();
+  const requestedScript = String(body.script || "楷书").trim();
+  const { script, master } = normalizeScriptAndMaster({
+    script: requestedScript,
+    master: String(body.master || "").trim(),
+  });
   const format = String(body.format || "中堂").trim();
 
   if (!rawText) {
     return Response.json({ error: "请输入想生成的书法内容。" }, { status: 400 });
   }
 
-  if (!scripts.includes(script) || !masters.includes(master) || !formats.includes(format)) {
-    return Response.json({ error: "书体、风格参考或作品形式不在支持范围内。" }, { status: 400 });
+  if (!scripts.includes(script) || !formats.includes(format)) {
+    return Response.json({ error: "书体或作品形式不在支持范围内。" }, { status: 400 });
   }
 
   const prompt = buildImagePrompt({ text, script, master, format });
+  const local = tryGenerateLocalCalligraphy({ text, script, master, format, prompt });
+
+  if (local.ok) {
+    const work = saveWork({ text, script, master, format, prompt, imageUrl: local.imageUrl });
+
+    return Response.json({
+      provider: local.provider,
+      prompt,
+      imageUrl: local.imageUrl,
+      work,
+    });
+  }
+
   let provider = process.env.IMAGE_MODEL_PROVIDER || "mock";
   let imageUrl;
 
@@ -44,5 +68,6 @@ export async function POST(request) {
     prompt,
     imageUrl,
     work,
+    localMissingChars: local.missingChars || [],
   });
 }

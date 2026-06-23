@@ -3,45 +3,43 @@
 import { useEffect, useMemo, useState } from "react";
 import { BookOpenText, Download, History, ImagePlus, LayoutTemplate, Send, Sparkles, Wand2 } from "lucide-react";
 
-const scripts = ["楷书", "行书", "草书", "隶书", "篆书"];
-const masters = ["王羲之", "颜真卿", "柳公权", "欧阳询", "褚遂良", "米芾", "赵孟頫"];
+const scripts = ["楷书", "隶书", "篆书"];
+const scriptMasterMap = {
+  楷书: "褚遂良",
+  隶书: "曹全碑",
+  篆书: "铁线篆",
+};
 const formats = ["中堂", "条幅", "横幅", "对联", "扇面"];
 
 const presets = [
-  { label: "书房雅句", text: "静以修身", script: "楷书", master: "欧阳询", format: "横幅" },
-  { label: "斗方祝福", text: "福寿康宁", script: "隶书", master: "赵孟頫", format: "中堂" },
-  { label: "行书题赠", text: "清风入怀", script: "行书", master: "王羲之", format: "条幅" },
-  { label: "新春对联", text: "春风得意\n福满人间", script: "楷书", master: "颜真卿", format: "对联" },
+  { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "横幅" },
+  { label: "曹碑横幅", text: "福寿康宁", script: "隶书", master: "曹全碑", format: "横幅" },
+  { label: "铁线篆", text: "清风入怀", script: "篆书", master: "铁线篆", format: "条幅" },
 ];
 
 const questionExamples = [
-  "临《兰亭序》时如何观察行气？",
-  "颜真卿楷书适合初学者吗？",
+  "褚遂良楷书临摹时先看什么？",
+  "曹全碑隶书的波磔怎么观察？",
+  "铁线篆适合写什么内容？",
   "横幅作品落款和印章怎么安排？",
 ];
 
 const scriptNotes = {
-  楷书: "端正严谨，适合入门、题匾、格言和庄重场景。",
-  行书: "流动自然，适合题赠、诗句和日常创作。",
-  草书: "节奏强烈，适合表现情绪与速度感；系统会尽量保持草法意趣和可辨识度。",
-  隶书: "蚕头燕尾，古朴舒展，适合横幅和雅句；提示词会强调波磔与扁方结体。",
-  篆书: "圆转古雅，适合印章感、古文字风格和装饰性作品；系统会优先约束为小篆/篆书风格。",
+  楷书: "固定褚遂良，清劲秀逸，结体疏朗。",
+  隶书: "固定曹全碑，扁方舒展，秀润古雅。",
+  篆书: "固定铁线篆，线条匀细，圆转精严。",
 };
 
 const masterNotes = {
-  王羲之: "清和流美，重行气与牵丝映带。",
-  颜真卿: "宽博雄强，适合厚重端庄的内容。",
-  柳公权: "骨力劲健，结字清瘦挺拔。",
-  欧阳询: "险劲严整，适合结构训练。",
-  褚遂良: "秀逸灵动，线条富弹性。",
-  米芾: "欹侧多变，适合行书表达。",
-  赵孟頫: "温润秀雅，适合柔和文气。",
+  褚遂良: "只用于楷书，强调清劲、灵动、疏朗。",
+  曹全碑: "只用于隶书，强调秀润、波磔、横势。",
+  铁线篆: "只用于篆书，强调匀净、圆转、修长。",
 };
 
 const defaultForm = {
   text: "厚德载物",
   script: "楷书",
-  master: "颜真卿",
+  master: "褚遂良",
   format: "中堂",
 };
 
@@ -144,7 +142,12 @@ export default function Home() {
   }
 
   function updateForm(field, value) {
-    setForm((current) => ({ ...current, [field]: value }));
+    setForm((current) => {
+      if (field === "script") {
+        return { ...current, script: value, master: scriptMasterMap[value] };
+      }
+      return { ...current, [field]: value };
+    });
   }
 
   function applyPreset(preset) {
@@ -156,6 +159,18 @@ export default function Home() {
     });
     setLayoutAdvice(null);
     setArtwork(null);
+  }
+
+  function applyWork(work) {
+    const script = scripts.includes(work.script) ? work.script : "楷书";
+    const format = formats.includes(work.format) ? work.format : "中堂";
+    setForm({
+      text: work.inputText,
+      script,
+      master: scriptMasterMap[script],
+      format,
+    });
+    setArtwork({ imageUrl: work.imageUrl, prompt: work.prompt });
   }
 
   return (
@@ -273,11 +288,7 @@ export default function Home() {
             </label>
             <label>
               风格参考
-              <select value={form.master} onChange={(event) => updateForm("master", event.target.value)}>
-                {masters.map((item) => (
-                  <option key={item}>{item}</option>
-                ))}
-              </select>
+              <input value={form.master} readOnly />
             </label>
             <label>
               作品形式
@@ -356,10 +367,7 @@ export default function Home() {
               <button
                 key={work.id}
                 className="workCard"
-                onClick={() => {
-                  setForm({ text: work.inputText, script: work.script, master: work.master, format: work.format });
-                  setArtwork({ imageUrl: work.imageUrl, prompt: work.prompt });
-                }}
+                onClick={() => applyWork(work)}
               >
                 <img src={work.imageUrl} alt={`${work.inputText} 书法作品`} />
                 <span>{work.inputText}</span>
