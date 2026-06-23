@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:char-index": "node tools/build-calligraphy-char-index.mjs",
     "start": "next start",
     "lint": "next lint"
   },
