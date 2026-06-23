@@ -39,9 +39,14 @@ export async function POST(request) {
 
     return Response.json({
       provider: local.provider,
+      text,
+      script,
+      master,
+      format,
       prompt,
       imageUrl: local.imageUrl,
       work,
+      localMissingChars: [],
     });
   }
 
@@ -65,6 +70,10 @@ export async function POST(request) {
 
   return Response.json({
     provider,
+    text,
+    script,
+    master,
+    format,
     prompt,
     imageUrl,
     work,
