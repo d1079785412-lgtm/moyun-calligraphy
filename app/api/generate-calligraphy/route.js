@@ -33,12 +33,12 @@ export async function POST(request) {
     return Response.json({ error: "书体或作品形式不在支持范围内。" }, { status: 400 });
   }
 
-  const charsPerLine = normalizeCharsPerLine(body.charsPerLine, format);
   const maxChars = getFormatMaxChars(format);
   const charCount = Array.from(rawText).filter((char) => char !== "\n").length;
   if (charCount > maxChars) {
     return Response.json({ error: `${format}最多支持 ${maxChars} 个字。` }, { status: 400 });
   }
+  const charsPerLine = format === "对联" ? Math.max(1, Math.floor(charCount / 2)) : normalizeCharsPerLine(body.charsPerLine, format);
 
   const prompt = buildImagePrompt({ text, script, master, format, charsPerLine });
   const local = tryGenerateLocalCalligraphy({ text, script, master, format, charsPerLine, prompt });
