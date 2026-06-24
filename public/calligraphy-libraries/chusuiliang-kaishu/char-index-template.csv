@@ -1740,7 +1740,7 @@ char,simplified,aliases,glyph_id,note
 丧,丧,丧|喪,cs1_p15_c05_r10,manual-review
 怔,,怔,cs1_p15_c06_r10,manual-review
 拾,,拾,cs1_p15_c01_r11,
-,,,cs1_p15_c02_r11,
+牵,牵,牵|牽,cs1_p15_c02_r11,manual-review-resolved
 纤,纤,纤|纖,cs1_p15_c03_r11,manual-review
 魄,,魄,cs1_p15_c04_r11,
 括,,括,cs1_p15_c05_r11,
@@ -1783,7 +1783,7 @@ char,simplified,aliases,glyph_id,note
 骨,,骨,cs1_p15_c06_r17,
 藏,,藏,cs1_p15_c01_r18,
 ,,,cs1_p15_c02_r18,manual-review-cleared
-,,,cs1_p15_c03_r18,
+键,键,键|鍵,cs1_p15_c03_r18,manual-review-resolved
 慎,,慎,cs1_p15_c04_r18,
 眸,,眸,cs1_p15_c05_r18,
 鄉,,鄉,cs1_p15_c06_r18,
@@ -1894,7 +1894,7 @@ char,simplified,aliases,glyph_id,note
 编,编,编|編,cs1_p16_c03_r16,
 瘦,,瘦,cs1_p16_c04_r16,
 姜,姜,姜|薑,cs1_p16_c05_r16,
-,,,cs1_p16_c06_r16,
+姜,姜,姜|薑,cs1_p16_c06_r16,manual-review-resolved
 斧,,斧,cs1_p16_c01_r17,
 繁,,繁,cs1_p16_c02_r17,
 允,,允,cs1_p16_c03_r17,
@@ -2290,7 +2290,7 @@ char,simplified,aliases,glyph_id,note
 虏,虏,虏|虜,cs1_p20_c03_r02,
 呻,,呻,cs1_p20_c04_r02,
 爐,,爐,cs1_p20_c05_r02,
-,,,cs1_p20_c06_r02,
+辩,辩,辩|辯,cs1_p20_c06_r02,manual-review-resolved
 殷,,殷,cs1_p20_c01_r03,
 嗓,,嗓,cs1_p20_c02_r03,
 狞,狞,狞|獰,cs1_p20_c03_r03,manual-review
@@ -2343,7 +2343,7 @@ char,simplified,aliases,glyph_id,note
 逢,,逢,cs1_p20_c02_r11,
 祺,,祺,cs1_p20_c03_r11,
 竭,,竭,cs1_p20_c04_r11,
-,,,cs1_p20_c05_r11,
+潇,潇,潇|瀟,cs1_p20_c05_r11,manual-review-resolved
 苗,,苗,cs1_p20_c06_r11,
 娶,,娶,cs1_p20_c01_r12,
 炽,炽,炽|熾,cs1_p20_c02_r12,manual-review
@@ -2423,7 +2423,7 @@ char,simplified,aliases,glyph_id,note
 缚,缚,缚|縛,cs1_p21_c04_r04,
 彪,,彪,cs1_p21_c05_r04,
 碌,,碌,cs1_p21_c06_r04,
-,,,cs1_p21_c01_r05,
+庙,庙,庙|廟,cs1_p21_c01_r05,manual-review-resolved
 霍,,霍,cs1_p21_c02_r05,
 妞,,妞,cs1_p21_c03_r05,
 障,,障,cs1_p21_c04_r05,
@@ -2454,7 +2454,7 @@ char,simplified,aliases,glyph_id,note
 钉,钉,钉|釘,cs1_p21_c05_r09,manual-review
 阎,阎,阎|閻,cs1_p21_c06_r09,manual-review
 帘,帘,帘|簾,cs1_p21_c01_r10,
-,,,cs1_p21_c02_r10,
+帘,帘,帘|簾,cs1_p21_c02_r10,manual-review-resolved
 嗤,,嗤,cs1_p21_c03_r10,manual-review
 窃,窃,窃|竊,cs1_p21_c04_r10,manual-review
 蔓,,蔓,cs1_p21_c05_r10,
@@ -2477,7 +2477,7 @@ char,simplified,aliases,glyph_id,note
 津,,津,cs1_p21_c04_r13,
 拆,,拆,cs1_p21_c05_r13,
 噗,,噗,cs1_p21_c06_r13,
-,,,cs1_p21_c01_r14,
+萝,萝,萝|蘿,cs1_p21_c01_r14,manual-review-resolved
 赴,,赴,cs1_p21_c02_r14,
 蚁,蚁,蚁|蟻,cs1_p21_c03_r14,manual-review
 诈,诈,诈|詐,cs1_p21_c04_r14,manual-review
@@ -2519,7 +2519,7 @@ char,simplified,aliases,glyph_id,note
 寞,,寞,cs1_p21_c04_r20,
 毙,毙,毙|斃,cs1_p21_c05_r20,manual-review
 憋,,憋,cs1_p21_c06_r20,
-,,,cs1_p22_c01_r01,
+乙,,乙,cs1_p22_c01_r01,manual-review-resolved
 喔,,喔,cs1_p22_c02_r01,
 翰,,翰,cs1_p22_c03_r01,manual-review
 坎,,坎,cs1_p22_c04_r01,
@@ -2776,7 +2776,7 @@ char,simplified,aliases,glyph_id,note
 婢,,婢,cs1_p24_c03_r03,
 沮,,沮,cs1_p24_c04_r03,
 荐,荐,荐|薦,cs1_p24_c05_r03,
-,,,cs1_p24_c06_r03,
+荐,荐,荐|薦,cs1_p24_c06_r03,manual-review-resolved
 肺,,肺,cs1_p24_c01_r04,
 亨,,亨,cs1_p24_c02_r04,
 页,页,页|頁,cs1_p24_c03_r04,manual-review
@@ -3646,7 +3646,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs1_p31_c03_r08,manual-review-cleared
 黠,,黠,cs1_p31_c04_r08,manual-review
 啄,,啄,cs1_p31_c05_r08,
-冀,,冀,cs1_p31_c06_r08,
+粪,粪,粪|糞,cs1_p31_c06_r08,manual-review-resolved
 鸯,鸯,鸯|鴦,cs1_p31_c01_r09,manual-review
 柬,,柬,cs1_p31_c02_r09,
 飼,,飼,cs1_p31_c03_r09,
@@ -3925,7 +3925,7 @@ char,simplified,aliases,glyph_id,note
 熏,熏,熏|薰,cs1_p33_c06_r14,
 ,,,cs1_p33_c01_r15,
 幌,,幌,cs1_p33_c02_r15,
-报,报,报|報,cs1_p33_c03_r15,
+赧,,赧,cs1_p33_c03_r15,manual-review-resolved
 ,,,cs1_p33_c04_r15,
 荤,荤,荤|葷,cs1_p33_c05_r15,manual-review
 卯,,卯,cs1_p33_c06_r15,
