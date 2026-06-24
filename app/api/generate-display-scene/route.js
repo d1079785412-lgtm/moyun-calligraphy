@@ -32,7 +32,7 @@ export async function POST(request) {
   }
 
   const prompt = buildDisplayScenePrompt({ text, script, master, format, sceneMode });
-  const usableReference = /^https?:\/\//i.test(referenceImageUrl) || /^data:image\/(png|jpe?g|webp);base64,/i.test(referenceImageUrl)
+  const usableReference = /^https?:\/\//i.test(referenceImageUrl) || /^data:image\/(png|jpe?g|webp|svg\+xml);base64,/i.test(referenceImageUrl)
     ? referenceImageUrl
     : "";
 
