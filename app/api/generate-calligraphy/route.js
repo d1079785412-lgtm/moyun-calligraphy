@@ -56,7 +56,7 @@ export async function POST(request) {
       prompt,
       imageUrl: local.imageUrl,
       work,
-      localMissingChars: [],
+      localMissingChars: local.missingChars || [],
     });
   }
 

@@ -137,9 +137,13 @@ export default function Home() {
       if (!response.ok) throw new Error(data.error || "作品生成接口请求失败");
       setArtwork(data);
       if (data.localMissingChars?.length > 0) {
-        setNotice(`褚遂良本地字库暂缺：${data.localMissingChars.join("、")}，本次已回退图片模型生成。`);
+        setNotice(`本地字库暂缺：${data.localMissingChars.join("、")}，已用系统字形补位。`);
       } else if (data.provider === "local-chusuiliang-kaishu") {
         setNotice("已使用褚遂良楷书本地字库集字生成。");
+      } else if (data.provider === "local-caoquan-lishu") {
+        setNotice("已使用曹全碑隶书本地字库集字生成。");
+      } else if (data.provider === "local-tiexianzhuan") {
+        setNotice("已使用铁线篆本地字库集字生成。");
       }
       if (data.work?.inputText) {
         setForm((current) => ({ ...current, text: data.work.inputText }));
