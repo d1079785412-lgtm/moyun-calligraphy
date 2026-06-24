@@ -58793,5 +58793,27 @@
     "row": 7,
     "column_ltr": 5,
     "label": "茸"
+  },
+  {
+    "id": "manual_kang",
+    "glyphUrl": "/calligraphy-libraries/caoquan-lishu/glyphs/manual_kang.png",
+    "width": 187,
+    "height": 272,
+    "source": "手工补字-截图左上角",
+    "page": null,
+    "row": null,
+    "column_ltr": null,
+    "label": "康"
+  },
+  {
+    "id": "manual_shou",
+    "glyphUrl": "/calligraphy-libraries/caoquan-lishu/glyphs/manual_shou.png",
+    "width": 187,
+    "height": 272,
+    "source": "手工补字-截图左上角",
+    "page": null,
+    "row": null,
+    "column_ltr": null,
+    "label": "寿"
   }
 ]
