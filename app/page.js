@@ -84,6 +84,7 @@ export default function Home() {
 
   const maxChars = formatMaxChars[form.format] || 50;
   const maxCharsPerLine = Math.min(maxChars, 50);
+  const isCouplet = form.format === "对联";
 
   const quickLayout = useMemo(() => {
     const count = Array.from(form.text || "").filter((char) => char !== "\n").length;
@@ -125,13 +126,21 @@ export default function Home() {
 
   async function generateArtwork(event) {
     event.preventDefault();
+    if (!isCouplet && !form.charsPerLine) {
+      setForm((current) => ({ ...current, charsPerLine: 1 }));
+    }
     setGenerateLoading(true);
     setNotice("");
     try {
+      const textCount = Array.from(form.text || "").filter((char) => char !== "\n").length;
+      const payload = {
+        ...form,
+        charsPerLine: isCouplet ? Math.max(1, Math.floor(textCount / 2)) : form.charsPerLine || 1,
+      };
       const response = await fetch("/api/generate-calligraphy", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "作品生成接口请求失败");
@@ -174,6 +183,7 @@ export default function Home() {
         return { ...current, text: Array.from(value || "").slice(0, formatMaxChars[current.format] || 50).join("") };
       }
       if (field === "charsPerLine") {
+        if (value === "") return { ...current, charsPerLine: "" };
         const max = formatMaxChars[current.format] || 50;
         const number = Number.parseInt(value, 10);
         return { ...current, charsPerLine: Math.max(1, Math.min(Number.isFinite(number) ? number : 1, max)) };
@@ -307,15 +317,22 @@ export default function Home() {
               <small className="fieldHint">{formatNotes[form.format]}</small>
             </label>
             <label>
-              每行字数
-              <input
-                type="number"
-                min="1"
-                max={maxCharsPerLine}
-                value={form.charsPerLine}
-                onChange={(event) => updateForm("charsPerLine", event.target.value)}
-              />
-              <small className="fieldHint">1-{maxCharsPerLine} 字。</small>
+              {isCouplet ? "对联分行" : "每行字数"}
+              {isCouplet ? (
+                <input value="自动两行" readOnly />
+              ) : (
+                <input
+                  type="number"
+                  min="1"
+                  max={maxCharsPerLine}
+                  value={form.charsPerLine}
+                  onChange={(event) => updateForm("charsPerLine", event.target.value)}
+                  onBlur={() => {
+                    if (!form.charsPerLine) updateForm("charsPerLine", "1");
+                  }}
+                />
+              )}
+              <small className="fieldHint">{isCouplet ? "自动分为两行，奇数时多出的字放第二行。" : `1-${maxCharsPerLine} 字。`}</small>
             </label>
             <button type="submit" disabled={generateLoading}>
               <Sparkles size={18} />
