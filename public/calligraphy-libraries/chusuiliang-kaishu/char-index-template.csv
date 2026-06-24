@@ -112,7 +112,7 @@ char,simplified,aliases,glyph_id,note
 老,,老,cs1_p01_c03_r19,
 被,,被,cs1_p01_c04_r19,
 動,,動,cs1_p01_c05_r19,
-当,当,当|當,cs1_p01_c06_r19,manual-review
+,,,cs1_p01_c06_r19,manual-review-cleared
 當,,當,cs1_p01_c01_r20,
 用,,用,cs1_p01_c02_r20,
 于,于,于|於,cs1_p01_c03_r20,
@@ -226,15 +226,15 @@ char,simplified,aliases,glyph_id,note
 吗,吗,吗|嗎,cs1_p02_c03_r18,manual-review
 虽,虽,虽|雖,cs1_p02_c04_r18,
 撃,,撃,cs1_p02_c05_r18,
-警,,警,cs1_p02_c06_r18,
+,,,cs1_p02_c06_r18,manual-review-cleared
 放,,放,cs1_p02_c01_r19,
 四,,四,cs1_p02_c02_r19,
 公,,公,cs1_p02_c03_r19,
 完,,完,cs1_p02_c04_r19,
 靈,,靈,cs1_p02_c05_r19,
-并,并,并|並,cs1_p02_c06_r19,
+,,,cs1_p02_c06_r19,manual-review-cleared
 并,并,并|並,cs1_p02_c01_r20,manual-review
-饼,饼,饼|餅,cs1_p02_c02_r20,
+,,,cs1_p02_c02_r20,manual-review-cleared
 先,,先,cs1_p02_c03_r20,
 士,,士,cs1_p02_c04_r20,manual-review
 处,处,处|處,cs1_p02_c05_r20,manual-review
@@ -255,7 +255,7 @@ char,simplified,aliases,glyph_id,note
 斯,,斯,cs1_p03_c02_r03,
 望,,望,cs1_p03_c03_r03,
 竟,,竟,cs1_p03_c04_r03,
-云,云,云|雲,cs1_p03_c05_r03,
+,,,cs1_p03_c05_r03,manual-review-cleared
 雲,,雲,cs1_p03_c06_r03,
 原,,原,cs1_p03_c01_r04,
 者,,者,cs1_p03_c02_r04,
@@ -324,7 +324,7 @@ char,simplified,aliases,glyph_id,note
 解,,解,cs1_p03_c05_r14,
 精,,精,cs1_p03_c06_r14,
 暗,,暗,cs1_p03_c01_r15,
-满,满,满|滿,cs1_p03_c02_r15,
+,,,cs1_p03_c02_r15,manual-review-cleared
 满,,满,cs1_p03_c03_r15,manual-review
 雙,,雙,cs1_p03_c04_r15,
 修,,修,cs1_p03_c05_r15,
@@ -410,7 +410,7 @@ char,simplified,aliases,glyph_id,note
 識,,識,cs1_p04_c01_r09,
 題,,題,cs1_p04_c02_r09,
 低,,低,cs1_p04_c03_r09,
-衛,,衛,cs1_p04_c04_r09,
+卫,,卫,cs1_p04_c04_r09,manual-review
 停,,停,cs1_p04_c05_r09,
 呼,,呼,cs1_p04_c06_r09,
 司,,司,cs1_p04_c01_r10,
@@ -427,9 +427,9 @@ char,simplified,aliases,glyph_id,note
 房,,房,cs1_p04_c06_r11,
 亚,,亚,cs1_p04_c01_r12,
 代,,代,cs1_p04_c02_r12,
-鼻,,鼻,cs1_p04_c03_r12,
+员,,员,cs1_p04_c03_r12,manual-review
 伙,,伙,cs1_p04_c04_r12,
-移,,移,cs1_p04_c05_r12,
+,,,cs1_p04_c05_r12,manual-review-cleared
 缓,缓,缓|緩,cs1_p04_c06_r12,
 居,,居,cs1_p04_c01_r13,
 六,,六,cs1_p04_c02_r13,
@@ -449,7 +449,7 @@ char,simplified,aliases,glyph_id,note
 玩,,玩,cs1_p04_c04_r15,
 玩,,玩,cs1_p04_c05_r15,manual-review
 報,,報,cs1_p04_c06_r15,
-鐵,,鐵,cs1_p04_c01_r16,
+钱,,钱,cs1_p04_c01_r16,manual-review
 疑,,疑,cs1_p04_c02_r16,
 睛,,睛,cs1_p04_c03_r16,
 宇,,宇,cs1_p04_c04_r16,
