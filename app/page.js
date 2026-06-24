@@ -131,6 +131,7 @@ export default function Home() {
     }
     setGenerateLoading(true);
     setNotice("");
+    setArtwork(null);
     try {
       const textCount = Array.from(form.text || "").filter((char) => char !== "\n").length;
       const payload = {
@@ -159,6 +160,7 @@ export default function Home() {
       }
       await loadWorks();
     } catch (error) {
+      setArtwork(null);
       setNotice(error.message);
     } finally {
       setGenerateLoading(false);
