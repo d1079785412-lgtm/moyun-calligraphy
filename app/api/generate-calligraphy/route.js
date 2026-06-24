@@ -2,7 +2,9 @@ import {
   buildImagePrompt,
   createMockArtworkSvg,
   formats,
+  getFormatMaxChars,
   normalizeCalligraphyText,
+  normalizeCharsPerLine,
   normalizeScriptAndMaster,
   scripts,
 } from "@/lib/calligraphy";
@@ -31,8 +33,15 @@ export async function POST(request) {
     return Response.json({ error: "书体或作品形式不在支持范围内。" }, { status: 400 });
   }
 
-  const prompt = buildImagePrompt({ text, script, master, format });
-  const local = tryGenerateLocalCalligraphy({ text, script, master, format, prompt });
+  const charsPerLine = normalizeCharsPerLine(body.charsPerLine, format);
+  const maxChars = getFormatMaxChars(format);
+  const charCount = Array.from(rawText).filter((char) => char !== "\n").length;
+  if (charCount > maxChars) {
+    return Response.json({ error: `${format}最多支持 ${maxChars} 个字。` }, { status: 400 });
+  }
+
+  const prompt = buildImagePrompt({ text, script, master, format, charsPerLine });
+  const local = tryGenerateLocalCalligraphy({ text, script, master, format, charsPerLine, prompt });
 
   if (local.ok) {
     const work = saveWork({ text, script, master, format, prompt, imageUrl: local.imageUrl });
@@ -43,6 +52,7 @@ export async function POST(request) {
       script,
       master,
       format,
+      charsPerLine,
       prompt,
       imageUrl: local.imageUrl,
       work,
@@ -62,7 +72,7 @@ export async function POST(request) {
   }
 
   if (!imageUrl) {
-    const svg = createMockArtworkSvg({ text, script, master, format });
+    const svg = createMockArtworkSvg({ text, script, master, format, charsPerLine });
     imageUrl = `data:image/svg+xml;base64,${Buffer.from(svg, "utf8").toString("base64")}`;
   }
 
@@ -74,6 +84,7 @@ export async function POST(request) {
     script,
     master,
     format,
+    charsPerLine,
     prompt,
     imageUrl,
     work,
