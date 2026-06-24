@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BookOpenText, Download, History, ImagePlus, LayoutTemplate, Send, Sparkles, Wand2 } from "lucide-react";
+import { BookOpenText, Download, Frame, History, ImagePlus, LayoutTemplate, Send, Sparkles, Wand2 } from "lucide-react";
 
 const scripts = ["楷书", "隶书", "篆书"];
 const scriptMasterMap = {
@@ -10,6 +10,12 @@ const scriptMasterMap = {
   篆书: "铁线篆",
 };
 const formats = ["中堂", "条幅", "横幅", "对联", "扇面"];
+
+const displayModes = [
+  { id: "artwork", label: "只看作品", title: "原作预览" },
+  { id: "living", label: "客厅装框", title: "客厅挂画效果" },
+  { id: "gallery", label: "展馆装框", title: "展馆展陈效果" },
+];
 
 const presets = [
   { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "横幅" },
@@ -54,6 +60,7 @@ export default function Home() {
   const [layoutLoading, setLayoutLoading] = useState(false);
   const [works, setWorks] = useState([]);
   const [notice, setNotice] = useState("");
+  const [displayMode, setDisplayMode] = useState("artwork");
 
   const selectedSummary = useMemo(() => {
     return `${form.script} · ${form.master} · ${form.format}`;
@@ -187,6 +194,11 @@ export default function Home() {
             <p className="eyebrow">DeepSeek 问答 · Qwen 图像生成 · 书法创作辅助</p>
             <h1>墨韵智创——AI辅助书法生成艺术平台</h1>
             <p className="intro">面向书法爱好者和学习者，围绕碑帖知识、临摹方法、章法推敲与作品生成，提供一套可演示、可创作、可分享的数字书法工作台。</p>
+            <div className="heroBadges" aria-label="平台能力">
+              <span>碑帖知识问答</span>
+              <span>固定经典书体</span>
+              <span>装框场景预览</span>
+            </div>
           </div>
         </div>
       </section>
@@ -324,23 +336,32 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="resultGrid">
-            <div className="artPreview">
-              {generateLoading ? (
-                <div className="generating">
-                  <Sparkles size={26} />
-                  <strong>正在研墨生成</strong>
-                  <span>图片模型需要数秒到几十秒，请稍候。</span>
-                </div>
-              ) : artwork?.imageUrl ? (
-                <img src={artwork.imageUrl} alt="AI生成书法作品" />
-              ) : (
-                <div className="emptyArt">
-                  <span>墨</span>
-                  <p>{selectedSummary}</p>
-                </div>
-              )}
+          <div className="displayToolbar">
+            <div>
+              <strong>展示效果</strong>
+              <span>生成后可切换原作、客厅装框或展馆展陈视图。</span>
             </div>
+            <div className="displayTabs" role="tablist" aria-label="展示效果">
+              {displayModes.map((mode) => (
+                <button
+                  key={mode.id}
+                  type="button"
+                  className={displayMode === mode.id ? "displayTab active" : "displayTab"}
+                  onClick={() => setDisplayMode(mode.id)}
+                >
+                  {mode.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="resultGrid">
+            <ArtworkPreview
+              artwork={artwork}
+              displayMode={displayMode}
+              generateLoading={generateLoading}
+              selectedSummary={selectedSummary}
+            />
             <div className="promptBox">
               <h3>作品说明</h3>
               <div className="metaGrid">
@@ -348,6 +369,7 @@ export default function Home() {
                 <span>书体：{form.script}</span>
                 <span>风格：{form.master}</span>
                 <span>形式：{form.format}</span>
+                <span>展示：{displayModes.find((mode) => mode.id === displayMode)?.title}</span>
               </div>
               <h3>图片生成提示词</h3>
               <p>{artwork?.prompt || "生成后将在这里显示自动组合的图片提示词，后续可直接传给真实图片模型。"}</p>
@@ -385,6 +407,67 @@ export default function Home() {
         </article>
       </section>
     </main>
+  );
+}
+
+function ArtworkPreview({ artwork, displayMode, generateLoading, selectedSummary }) {
+  if (generateLoading) {
+    return (
+      <div className="artPreview">
+        <div className="generating">
+          <Sparkles size={26} />
+          <strong>正在研墨生成</strong>
+          <span>图片模型需要数秒到几十秒，请稍候。</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!artwork?.imageUrl) {
+    return (
+      <div className="artPreview">
+        <div className="emptyArt">
+          <span>墨</span>
+          <p>{selectedSummary}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (displayMode === "artwork") {
+    return (
+      <div className="artPreview">
+        <img src={artwork.imageUrl} alt="AI生成书法作品" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`scenePreview ${displayMode === "gallery" ? "galleryScene" : "livingScene"}`}>
+      <div className="sceneWall">
+        <div className="spotlight left" />
+        <div className="spotlight right" />
+        <div className="frameMount">
+          <div className="frameMat">
+            <img src={artwork.imageUrl} alt="装框后的书法作品效果" />
+          </div>
+        </div>
+        <div className="sceneLabel">
+          <Frame size={15} />
+          {displayMode === "gallery" ? "展馆展陈预览" : "客厅挂画预览"}
+        </div>
+      </div>
+      <div className="sceneFloor">
+        {displayMode === "gallery" ? (
+          <div className="galleryBench" />
+        ) : (
+          <>
+            <div className="livingSofa" />
+            <div className="sideTable" />
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 
