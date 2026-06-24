@@ -1,0 +1,13 @@
+glyph_id,reason,values,files
+cs1_p15_c02_r11,different-values,牵|纤,1-chusuiliang-corrections.csv:牵; 2-chusuiliang-corrections-2.csv:纤
+cs1_p15_c03_r18,multi-character,键盘|键,1-chusuiliang-corrections.csv:键盘; 2-chusuiliang-corrections-2.csv:键
+cs1_p16_c06_r16,different-values,姜|薑,1-chusuiliang-corrections.csv:姜; 2-chusuiliang-corrections-2.csv:薑
+cs1_p20_c06_r02,different-values,辩|辨,1-chusuiliang-corrections.csv:辩; 2-chusuiliang-corrections-2.csv:辨
+cs1_p20_c05_r11,different-values,潇|萧,1-chusuiliang-corrections.csv:潇; 2-chusuiliang-corrections-2.csv:萧
+cs1_p21_c01_r05,different-values,庙|廟,1-chusuiliang-corrections.csv:庙; 2-chusuiliang-corrections-2.csv:廟
+cs1_p21_c02_r10,different-values,廉|帘,1-chusuiliang-corrections.csv:廉; 2-chusuiliang-corrections-2.csv:帘
+cs1_p21_c01_r14,different-values,萝|罗,1-chusuiliang-corrections.csv:萝; 2-chusuiliang-corrections-2.csv:罗
+cs1_p22_c01_r01,different-values,乙|已,1-chusuiliang-corrections.csv:乙; 2-chusuiliang-corrections-2.csv:已
+cs1_p24_c06_r03,different-values,荐|蔫,1-chusuiliang-corrections.csv:荐; 2-chusuiliang-corrections-2.csv:蔫
+cs1_p31_c06_r08,multi-character,冀粪,1-chusuiliang-corrections.csv:冀粪
+cs1_p33_c03_r15,multi-character,chi,1-chusuiliang-corrections.csv:chi
