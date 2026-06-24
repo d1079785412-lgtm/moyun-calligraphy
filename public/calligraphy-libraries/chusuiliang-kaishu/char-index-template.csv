@@ -1812,7 +1812,7 @@ char,simplified,aliases,glyph_id,note
 寳,,寳,cs1_p16_c05_r02,
 廣,,廣,cs1_p16_c06_r02,
 狼,,狼,cs1_p16_c01_r03,
-,,,cs1_p16_c02_r03,
+斥,,斥,cs1_p16_c02_r03,manual-review
 戀,,戀,cs1_p16_c03_r03,
 饶,饶,饶|饒,cs1_p16_c04_r03,manual-review
 返,,返,cs1_p16_c05_r03,
@@ -2413,7 +2413,7 @@ char,simplified,aliases,glyph_id,note
 祈,,祈,cs1_p21_c06_r02,
 潘,,潘,cs1_p21_c01_r03,
 壶,壶,壶|壺,cs1_p21_c02_r03,
-,,,cs1_p21_c03_r03,
+聂,聂,聂|聶,cs1_p21_c03_r03,manual-review
 糕,,糕,cs1_p21_c04_r03,
 匠,,匠,cs1_p21_c05_r03,
 顽,顽,顽|頑,cs1_p21_c06_r03,
@@ -2499,7 +2499,7 @@ char,simplified,aliases,glyph_id,note
 衷,,衷,cs1_p21_c02_r17,
 媒,,媒,cs1_p21_c03_r17,
 渗,渗,渗|滲,cs1_p21_c04_r17,
-,,,cs1_p21_c05_r17,manual-review-cleared
+吁,吁,吁|籲,cs1_p21_c05_r17,manual-review
 ,,,cs1_p21_c06_r17,manual-review-cleared
 巢,,巢,cs1_p21_c01_r18,
 孝,,孝,cs1_p21_c02_r18,
@@ -2953,7 +2953,7 @@ char,simplified,aliases,glyph_id,note
 湛,,湛,cs1_p25_c06_r12,
 飙,飙,飙|飆,cs1_p25_c01_r13,manual-review
 揣,,揣,cs1_p25_c02_r13,
-,,,cs1_p25_c03_r13,manual-review-cleared
+侥,侥,侥|僥,cs1_p25_c03_r13,manual-review
 螺,,螺,cs1_p25_c04_r13,
 驭,驭,驭|馭,cs1_p25_c05_r13,manual-review
 肘,,肘,cs1_p25_c06_r13,
@@ -2978,7 +2978,7 @@ char,simplified,aliases,glyph_id,note
 裕,,裕,cs1_p25_c01_r17,
 骸,,骸,cs1_p25_c02_r17,
 匈,,匈,cs1_p25_c03_r17,
-,,,cs1_p25_c04_r17,
+跄,跄,跄|蹌,cs1_p25_c04_r17,manual-review
 辨,辨,辨|辨,cs1_p25_c05_r17,
 懈,,懈,cs1_p25_c06_r17,
 ,,,cs1_p25_c01_r18,
@@ -3104,13 +3104,13 @@ char,simplified,aliases,glyph_id,note
 搔,,搔,cs1_p26_c01_r18,
 偎,,偎,cs1_p26_c02_r18,
 谜,谜,谜|謎,cs1_p26_c03_r18,manual-review
-,,,cs1_p26_c04_r18,
+屿,屿,屿|嶼,cs1_p26_c04_r18,manual-review
 伽,,伽,cs1_p26_c05_r18,
 悯,悯,悯|憫,cs1_p26_c06_r18,manual-review
 钓,钓,钓|釣,cs1_p26_c01_r19,
 鸾,鸾,鸾|鸞,cs1_p26_c02_r19,manual-review
 煮,,煮,cs1_p26_c03_r19,
-,,,cs1_p26_c04_r19,
+娴,娴,娴|嫻,cs1_p26_c04_r19,manual-review
 桀,,桀,cs1_p26_c05_r19,
 拯,,拯,cs1_p26_c06_r19,
 蜥,,蜥,cs1_p26_c01_r20,
@@ -3202,7 +3202,7 @@ char,simplified,aliases,glyph_id,note
 蠕,,蠕,cs1_p27_c03_r14,
 诩,诩,诩|詡,cs1_p27_c04_r14,manual-review
 旱,,旱,cs1_p27_c05_r14,
-,,,cs1_p27_c06_r14,manual-review-cleared
+惺,,惺,cs1_p27_c06_r14,manual-review
 殴,殴,殴|毆,cs1_p27_c01_r15,manual-review
 梢,,梢,cs1_p27_c02_r15,
 裔,,裔,cs1_p27_c03_r15,
@@ -3219,10 +3219,10 @@ char,simplified,aliases,glyph_id,note
 叭,,叭,cs1_p27_c02_r17,
 ,,,cs1_p27_c03_r17,
 绫,绫,绫|綾,cs1_p27_c04_r17,
-,,,cs1_p27_c05_r17,
+谐,谐,谐|諧,cs1_p27_c05_r17,manual-review
 ,,,cs1_p27_c06_r17,
 聆,,聆,cs1_p27_c01_r18,
-,,,cs1_p27_c02_r18,
+帜,帜,帜|幟,cs1_p27_c02_r18,manual-review
 甸,,甸,cs1_p27_c03_r18,
 踱,,踱,cs1_p27_c04_r18,manual-review
 葡,,葡,cs1_p27_c05_r18,
@@ -3253,7 +3253,7 @@ char,simplified,aliases,glyph_id,note
 嗨,,嗨,cs1_p28_c06_r02,manual-review
 慷,,慷,cs1_p28_c01_r03,
 荀,,荀,cs1_p28_c02_r03,
-,,,cs1_p28_c03_r03,
+咄,,咄,cs1_p28_c03_r03,manual-review
 寓,,寓,cs1_p28_c04_r03,
 逾,,逾,cs1_p28_c05_r03,
 昕,,昕,cs1_p28_c06_r03,
@@ -3279,7 +3279,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs1_p28_c02_r07,
 框,,框,cs1_p28_c03_r07,
 酋,,酋,cs1_p28_c04_r07,
-,,,cs1_p28_c05_r07,
+谬,谬,谬|謬,cs1_p28_c05_r07,manual-review
 萄,,萄,cs1_p28_c06_r07,
 眺,,眺,cs1_p28_c01_r08,
 钞,钞,钞|鈔,cs1_p28_c02_r08,manual-review
@@ -3372,7 +3372,7 @@ char,simplified,aliases,glyph_id,note
 苛,,苛,cs1_p29_c05_r02,
 ,,,cs1_p29_c06_r02,manual-review-cleared
 葵,,葵,cs1_p29_c01_r03,
-,,,cs1_p29_c02_r03,
+阙,阙,阙|闕,cs1_p29_c02_r03,manual-review
 掳,掳,掳|擄,cs1_p29_c03_r03,
 晟,,晟,cs1_p29_c04_r03,
 佗,,佗,cs1_p29_c05_r03,
@@ -3440,7 +3440,7 @@ char,simplified,aliases,glyph_id,note
 酣,,酣,cs1_p29_c01_r14,manual-review
 寐,,寐,cs1_p29_c02_r14,
 ,,,cs1_p29_c03_r14,
-,,,cs1_p29_c04_r14,manual-review-cleared
+跷,跷,跷|蹺,cs1_p29_c04_r14,manual-review
 ,,,cs1_p29_c05_r14,
 黏,,黏,cs1_p29_c06_r14,
 舷,,舷,cs1_p29_c01_r15,
@@ -3523,7 +3523,7 @@ char,simplified,aliases,glyph_id,note
 超,,超,cs1_p30_c06_r07,
 壐,,壐,cs1_p30_c01_r08,
 拈,,拈,cs1_p30_c02_r08,manual-review
-,,,cs1_p30_c03_r08,
+羁,羁,羁|羈,cs1_p30_c03_r08,manual-review
 ,,,cs1_p30_c04_r08,manual-review-cleared
 讷,讷,讷|訥,cs1_p30_c05_r08,
 箍,,箍,cs1_p30_c06_r08,
@@ -3587,7 +3587,7 @@ char,simplified,aliases,glyph_id,note
 岐,,岐,cs1_p30_c04_r18,
 隘,,隘,cs1_p30_c05_r18,
 ,,,cs1_p30_c06_r18,
-,,,cs1_p30_c01_r19,
+笃,笃,笃|篤,cs1_p30_c01_r19,manual-review
 ,,,cs1_p30_c02_r19,manual-review-cleared
 酌,,酌,cs1_p30_c03_r19,
 帷,,帷,cs1_p30_c04_r19,
@@ -3605,7 +3605,7 @@ char,simplified,aliases,glyph_id,note
 瞩,瞩,瞩|矚,cs1_p31_c04_r01,
 汨,,汨,cs1_p31_c05_r01,
 唇,,唇,cs1_p31_c06_r01,manual-review
-,,,cs1_p31_c01_r02,
+掣,,掣,cs1_p31_c01_r02,manual-review
 ,,,cs1_p31_c02_r02,
 ,,,cs1_p31_c03_r02,
 餮,,餮,cs1_p31_c04_r02,
@@ -3634,7 +3634,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs1_p31_c03_r06,manual-review-cleared
 茗,,茗,cs1_p31_c04_r06,
 冢,,冢,cs1_p31_c05_r06,manual-review
-,,,cs1_p31_c06_r06,
+飒,飒,飒|颯,cs1_p31_c06_r06,manual-review
 咎,,咎,cs1_p31_c01_r07,
 憧,,憧,cs1_p31_c02_r07,
 繹,,繹,cs1_p31_c03_r07,
@@ -3753,7 +3753,7 @@ char,simplified,aliases,glyph_id,note
 睦,,睦,cs1_p32_c02_r06,
 ,,,cs1_p32_c03_r06,manual-review-cleared
 ,,,cs1_p32_c04_r06,
-,,,cs1_p32_c05_r06,manual-review-cleared
+阑,阑,阑|闌,cs1_p32_c05_r06,manual-review
 琵,,琵,cs1_p32_c06_r06,
 咀,,咀,cs1_p32_c01_r07,
 嫦,,嫦,cs1_p32_c02_r07,manual-review
@@ -3771,7 +3771,7 @@ char,simplified,aliases,glyph_id,note
 卵,,卵,cs1_p32_c02_r09,
 ,,,cs1_p32_c03_r09,
 濒,濒,濒|瀕,cs1_p32_c04_r09,manual-review
-,,,cs1_p32_c05_r09,manual-review-cleared
+剐,剐,剐|剮,cs1_p32_c05_r09,manual-review
 铳,铳,铳|銃,cs1_p32_c06_r09,manual-review
 擞,擞,擞|擻,cs1_p32_c01_r10,manual-review
 簧,,簧,cs1_p32_c02_r10,
@@ -3806,7 +3806,7 @@ char,simplified,aliases,glyph_id,note
 蟠,,蟠,cs1_p32_c01_r15,
 谄,谄,谄|諂,cs1_p32_c02_r15,manual-review
 颌,颌,颌|頜,cs1_p32_c03_r15,manual-review
-,,,cs1_p32_c04_r15,manual-review-cleared
+蛰,蛰,蛰|蟄,cs1_p32_c04_r15,manual-review
 刨,,刨,cs1_p32_c05_r15,
 锄,锄,锄|鋤,cs1_p32_c06_r15,
 浏,浏,浏|瀏,cs1_p32_c01_r16,manual-review
@@ -3827,7 +3827,7 @@ char,simplified,aliases,glyph_id,note
 栓,,栓,cs1_p32_c04_r18,
 ,,,cs1_p32_c05_r18,
 榭,,榭,cs1_p32_c06_r18,
-,,,cs1_p32_c01_r19,
+殒,殒,殒|殞,cs1_p32_c01_r19,manual-review
 烹,,烹,cs1_p32_c02_r19,
 寅,,寅,cs1_p32_c03_r19,
 礴,,礴,cs1_p32_c04_r19,
@@ -3883,7 +3883,7 @@ char,simplified,aliases,glyph_id,note
 嚏,,嚏,cs1_p33_c06_r07,
 潼,,潼,cs1_p33_c01_r08,
 ,,,cs1_p33_c02_r08,manual-review-cleared
-,,,cs1_p33_c03_r08,manual-review-cleared
+皑,皑,皑|皚,cs1_p33_c03_r08,manual-review
 熹,,熹,cs1_p33_c04_r08,
 渲,,渲,cs1_p33_c05_r08,
 ,,,cs1_p33_c06_r08,manual-review-cleared
@@ -3926,7 +3926,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs1_p33_c01_r15,
 幌,,幌,cs1_p33_c02_r15,
 赧,,赧,cs1_p33_c03_r15,manual-review-resolved
-,,,cs1_p33_c04_r15,
+嘹,,嘹,cs1_p33_c04_r15,manual-review
 荤,荤,荤|葷,cs1_p33_c05_r15,manual-review
 卯,,卯,cs1_p33_c06_r15,
 麓,,麓,cs1_p33_c01_r16,
@@ -4149,7 +4149,7 @@ char,simplified,aliases,glyph_id,note
 犁,,犁,cs1_p35_c02_r12,
 迄,,迄,cs1_p35_c03_r12,
 嫔,嫔,嫔|嬪,cs1_p35_c04_r12,manual-review
-,,,cs1_p35_c05_r12,
+玳,,玳,cs1_p35_c05_r12,manual-review
 浙,,浙,cs1_p35_c06_r12,
 骡,骡,骡|騾,cs1_p35_c01_r13,manual-review
 ,,,cs1_p35_c02_r13,
@@ -4192,7 +4192,7 @@ char,simplified,aliases,glyph_id,note
 讧,讧,讧|訌,cs1_p35_c03_r19,manual-review
 夔,,夔,cs1_p35_c04_r19,
 镂,镂,镂|鏤,cs1_p35_c05_r19,manual-review
-,,,cs1_p35_c06_r19,manual-review-cleared
+酆,,酆,cs1_p35_c06_r19,manual-review
 涮,,涮,cs1_p35_c01_r20,
 忧,忧,忧|憂,cs1_p35_c02_r20,
 澹,,澹,cs1_p35_c03_r20,
@@ -4429,7 +4429,7 @@ char,simplified,aliases,glyph_id,note
 蜍,,蜍,cs1_p37_c06_r18,
 汨,,汨,cs1_p37_c01_r19,
 孚,,孚,cs1_p37_c02_r19,
-,,,cs1_p37_c03_r19,
+邂,,邂,cs1_p37_c03_r19,manual-review
 ,,,cs1_p37_c04_r19,
 聒,,聒,cs1_p37_c05_r19,manual-review
 ,,,cs1_p37_c06_r19,
@@ -4668,7 +4668,7 @@ char,simplified,aliases,glyph_id,note
 彰,,彰,cs1_p39_c05_r18,
 徜,,徜,cs1_p39_c06_r18,
 酵,,酵,cs1_p39_c01_r19,
-,,,cs1_p39_c02_r19,
+桎,,桎,cs1_p39_c02_r19,manual-review
 鬣,,鬣,cs1_p39_c03_r19,
 擢,,擢,cs1_p39_c04_r19,
 育,,育,cs1_p39_c05_r19,
@@ -4689,7 +4689,7 @@ char,simplified,aliases,glyph_id,note
 族,,族,cs1_p40_c02_r02,
 ,,,cs1_p40_c03_r02,
 鼠,,鼠,cs1_p40_c04_r02,
-,,,cs1_p40_c05_r02,
+岫,,岫,cs1_p40_c05_r02,manual-review
 檬,,檬,cs1_p40_c06_r02,
 箔,,箔,cs1_p40_c01_r03,
 貊,,貊,cs1_p40_c02_r03,
@@ -4705,7 +4705,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs1_p40_c06_r04,
 過,,過,cs1_p40_c01_r05,
 瑰,,瑰,cs1_p40_c02_r05,
-,,,cs1_p40_c03_r05,
+赊,赊,赊|賒,cs1_p40_c03_r05,manual-review
 铨,铨,铨|銓,cs1_p40_c04_r05,
 ,,,cs1_p40_c05_r05,
 ,,,cs1_p40_c06_r05,
@@ -4832,7 +4832,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs2_p02_c02_r01,
 瓜,,瓜,cs2_p02_c03_r01,
 赔,赔,赔|賠,cs2_p02_c04_r01,
-,,,cs2_p02_c05_r01,
+鲭,鲭,鲭|鯖,cs2_p02_c05_r01,manual-review
 追,,追,cs2_p02_c06_r01,
 翼,,翼,cs2_p02_c01_r02,
 韶,,韶,cs2_p02_c02_r02,
@@ -5025,9 +5025,9 @@ char,simplified,aliases,glyph_id,note
 玟,,玟,cs2_p03_c03_r13,
 ,,,cs2_p03_c04_r13,
 貌,,貌,cs2_p03_c05_r13,
-,,,cs2_p03_c06_r13,
-,,,cs2_p03_c01_r14,
-,,,cs2_p03_c02_r14,
+琊,,琊,cs2_p03_c06_r13,manual-review
+翦,,翦,cs2_p03_c01_r14,manual-review
+狻,,狻,cs2_p03_c02_r14,manual-review
 ,,,cs2_p03_c03_r14,
 崧,,崧,cs2_p03_c04_r14,
 全,,全,cs2_p03_c05_r14,
@@ -5039,7 +5039,7 @@ char,simplified,aliases,glyph_id,note
 ,,,cs2_p03_c05_r15,
 ,,,cs2_p03_c06_r15,
 受,,受,cs2_p03_c01_r16,
-,,,cs2_p03_c02_r16,
+鲰,鲰,鲰|鯫,cs2_p03_c02_r16,manual-review
 第,,第,cs2_p03_c03_r16,
 ,,,cs2_p03_c04_r16,
 象,象,象|象,cs2_p03_c05_r16,
@@ -5111,7 +5111,7 @@ char,simplified,aliases,glyph_id,note
 而,,而,cs2_p04_c05_r07,
 作,作,作|作,cs2_p04_c06_r07,
 螺,,螺,cs2_p04_c01_r08,
-,,,cs2_p04_c02_r08,
+菰,,菰,cs2_p04_c02_r08,manual-review
 ,,,cs2_p04_c03_r08,
 維,,維,cs2_p04_c04_r08,
 ,,,cs2_p04_c05_r08,
@@ -5137,7 +5137,7 @@ char,simplified,aliases,glyph_id,note
 蚶,,蚶,cs2_p04_c01_r12,
 酯,,酯,cs2_p04_c02_r12,
 ,,,cs2_p04_c03_r12,
-,,,cs2_p04_c04_r12,
+励,励,励|勵,cs2_p04_c04_r12,manual-review
 ,,,cs2_p04_c05_r12,
 哇,,哇,cs2_p04_c06_r12,
 厥,,厥,cs2_p04_c01_r13,
@@ -5211,7 +5211,7 @@ char,simplified,aliases,glyph_id,note
 婺,,婺,cs2_p05_c03_r04,
 ,,,cs2_p05_c04_r04,
 愤,愤,愤|憤,cs2_p05_c05_r04,
-,,,cs2_p05_c06_r04,
+箧,箧,箧|篋,cs2_p05_c06_r04,manual-review
 岳,岳,岳|嶽,cs2_p05_c01_r05,
 ,,,cs2_p05_c02_r05,
 吟,,吟,cs2_p05_c03_r05,
@@ -5362,7 +5362,7 @@ char,simplified,aliases,glyph_id,note
 限,,限,cs2_p06_c04_r09,
 菌,,菌,cs2_p06_c05_r09,
 ,,,cs2_p06_c06_r09,
-,,,cs2_p06_c01_r10,
+睽,,睽,cs2_p06_c01_r10,manual-review
 共,,共,cs2_p06_c02_r10,
 ,,,cs2_p06_c03_r10,
 ,,,cs2_p06_c04_r10,
@@ -5395,7 +5395,7 @@ char,simplified,aliases,glyph_id,note
 钡,钡,钡|鋇,cs2_p06_c01_r15,manual-review
 挨,,挨,cs2_p06_c02_r15,
 茸,,茸,cs2_p06_c03_r15,
-,,,cs2_p06_c04_r15,
+寤,,寤,cs2_p06_c04_r15,manual-review
 潍,潍,潍|濰,cs2_p06_c05_r15,
 ,,,cs2_p06_c06_r15,
 采,,采,cs2_p06_c01_r16,
@@ -5448,7 +5448,7 @@ char,simplified,aliases,glyph_id,note
 陂,,陂,cs2_p07_c06_r03,
 氢,氢,氢|氫,cs2_p07_c01_r04,
 笏,,笏,cs2_p07_c02_r04,
-,,,cs2_p07_c03_r04,
+蚍,,蚍,cs2_p07_c03_r04,manual-review
 铙,铙,铙|鐃,cs2_p07_c04_r04,manual-review
 孵,,孵,cs2_p07_c05_r04,
 ,,,cs2_p07_c06_r04,
@@ -5495,7 +5495,7 @@ char,simplified,aliases,glyph_id,note
 钲,钲,钲|鉦,cs2_p07_c05_r11,manual-review
 ,,,cs2_p07_c06_r11,
 龍,,龍,cs2_p07_c01_r12,
-,,,cs2_p07_c02_r12,
+耋,,耋,cs2_p07_c02_r12,manual-review
 酮,,酮,cs2_p07_c03_r12,
 瘤,,瘤,cs2_p07_c04_r12,
 枸,,枸,cs2_p07_c05_r12,
@@ -5756,7 +5756,7 @@ char,simplified,aliases,glyph_id,note
 裔,,裔,cs2_p09_c02_r15,
 ,,,cs2_p09_c03_r15,
 湟,,湟,cs2_p09_c04_r15,
-,,,cs2_p09_c05_r15,
+氦,,氦,cs2_p09_c05_r15,manual-review
 銀,,銀,cs2_p09_c06_r15,
 筏,,筏,cs2_p09_c01_r16,manual-review
 缦,缦,缦|縵,cs2_p09_c02_r16,manual-review
@@ -5777,7 +5777,7 @@ char,simplified,aliases,glyph_id,note
 鲟,鲟,鲟|鱘,cs2_p09_c05_r18,
 泵,,泵,cs2_p09_c06_r18,
 辣,,辣,cs2_p09_c01_r19,
-,,,cs2_p09_c02_r19,
+号,号,号|號,cs2_p09_c02_r19,manual-review
 橡,,橡,cs2_p09_c03_r19,
 韭,,韭,cs2_p09_c04_r19,manual-review
 帧,帧,帧|幀,cs2_p09_c05_r19,
