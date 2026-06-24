@@ -6,12 +6,62 @@ const libraryDir = path.join(root, "public", "calligraphy-libraries", "chusuilia
 const report = JSON.parse(fs.readFileSync(path.join(libraryDir, "grid-label-ocr-report.json"), "utf8"));
 const index = JSON.parse(fs.readFileSync(path.join(libraryDir, "index.json"), "utf8"));
 const byId = new Map(index.map((record) => [record.id, record]));
+const templateRows = parseCsv(fs.readFileSync(path.join(libraryDir, "char-index-template.csv"), "utf8"));
+const templateHeader = templateRows[0];
+const templateColumns = Object.fromEntries(templateHeader.map((name, index) => [name, index]));
+const templateByGlyphId = new Map(
+  templateRows.slice(1).map((row) => [row[templateColumns.glyph_id], row]),
+);
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let quoted = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+
+    if (quoted) {
+      if (char === "\"" && next === "\"") {
+        field += "\"";
+        index += 1;
+      } else if (char === "\"") {
+        quoted = false;
+      } else {
+        field += char;
+      }
+    } else if (char === "\"") {
+      quoted = true;
+    } else if (char === ",") {
+      row.push(field);
+      field = "";
+    } else if (char === "\n") {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (char !== "\r") {
+      field += char;
+    }
+  }
+
+  if (field || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  return rows.filter((item) => item.some((value) => value !== ""));
+}
 
 const rows = report.map((item) => {
   const glyph = byId.get(item.glyphId) || {};
+  const templateRow = templateByGlyphId.get(item.glyphId);
+  const reviewedChar = templateRow?.[templateColumns.char] || "";
   return {
     id: item.glyphId,
-    char: item.char || "",
+    char: reviewedChar,
     text: item.ocr?.text || "",
     score: item.ocr?.score == null ? null : Number(item.ocr.score.toFixed(4)),
     source: item.source,
