@@ -60,6 +60,22 @@ export async function POST(request) {
     });
   }
 
+  if (local.reason === "missing_chars") {
+    return Response.json(
+      {
+        error: `本地字库暂缺：${local.missingChars.join("、")}。请先补充校对这些字后再生成。`,
+        provider: "local-missing",
+        text,
+        script,
+        master,
+        format,
+        charsPerLine,
+        localMissingChars: local.missingChars,
+      },
+      { status: 422 },
+    );
+  }
+
   let provider = process.env.IMAGE_MODEL_PROVIDER || "mock";
   let imageUrl;
 
