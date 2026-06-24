@@ -465,6 +465,21 @@ h1 {
   margin: 0;
 }
 
+.errorArt {
+  max-width: 320px;
+  text-align: center;
+}
+
+.errorArt span {
+  border-color: #b44731;
+  color: #b44731;
+}
+
+.errorArt p {
+  color: var(--seal-dark);
+  line-height: 1.7;
+}
+
 .generating {
   align-items: center;
   color: var(--ink-soft);

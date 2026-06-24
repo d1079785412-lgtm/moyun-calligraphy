@@ -74,6 +74,7 @@ export default function Home() {
   const [chatLoading, setChatLoading] = useState(false);
   const [form, setForm] = useState(defaultForm);
   const [artwork, setArtwork] = useState(null);
+  const [generationError, setGenerationError] = useState("");
   const [generateLoading, setGenerateLoading] = useState(false);
   const [works, setWorks] = useState([]);
   const [notice, setNotice] = useState("");
@@ -131,6 +132,7 @@ export default function Home() {
     }
     setGenerateLoading(true);
     setNotice("");
+    setGenerationError("");
     setArtwork(null);
     try {
       const textCount = Array.from(form.text || "").filter((char) => char !== "\n").length;
@@ -146,6 +148,7 @@ export default function Home() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "作品生成接口请求失败");
       setArtwork(data);
+      setGenerationError("");
       if (data.localMissingChars?.length > 0) {
         setNotice(`本地字库暂缺：${data.localMissingChars.join("、")}，已用系统字形补位。`);
       } else if (data.provider === "local-chusuiliang-kaishu") {
@@ -161,6 +164,7 @@ export default function Home() {
       await loadWorks();
     } catch (error) {
       setArtwork(null);
+      setGenerationError(error.message);
       setNotice(error.message);
     } finally {
       setGenerateLoading(false);
@@ -360,6 +364,7 @@ export default function Home() {
           <div className="resultGrid">
             <ArtworkPreview
               artwork={artwork}
+              generationError={generationError}
               generateLoading={generateLoading}
               selectedSummary={selectedSummary}
             />
@@ -408,7 +413,7 @@ export default function Home() {
   );
 }
 
-function ArtworkPreview({ artwork, generateLoading, selectedSummary }) {
+function ArtworkPreview({ artwork, generationError, generateLoading, selectedSummary }) {
   if (generateLoading) {
     return (
       <div className="artPreview">
@@ -424,9 +429,9 @@ function ArtworkPreview({ artwork, generateLoading, selectedSummary }) {
   if (!artwork?.imageUrl) {
     return (
       <div className="artPreview">
-        <div className="emptyArt">
+        <div className={generationError ? "emptyArt errorArt" : "emptyArt"}>
           <span>墨</span>
-          <p>{selectedSummary}</p>
+          <p>{generationError || selectedSummary}</p>
         </div>
       </div>
     );
