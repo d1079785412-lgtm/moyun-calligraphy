@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "墨韵智创——AI辅助书法生成艺术平台",
-  description: "AI赋能书法知识学习、章法设计、作品生成与展示",
+  description: "AI赋能书法知识学习、作品生成、装框预览与展示",
 };
 
 export default function RootLayout({ children }) {

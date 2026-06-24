@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BookOpenText, Download, Frame, History, ImagePlus, LayoutTemplate, Send, Sparkles, Wand2 } from "lucide-react";
+import { BookOpenText, Download, Frame, History, ImagePlus, Send, Sparkles, Wand2 } from "lucide-react";
 
 const scripts = ["楷书", "隶书", "篆书"];
 const scriptMasterMap = {
@@ -13,9 +13,18 @@ const formats = ["中堂", "条幅", "横幅", "对联", "扇面"];
 
 const displayModes = [
   { id: "artwork", label: "只看作品", title: "原作预览" },
+  { id: "framed", label: "正常装框", title: "正常装框效果" },
   { id: "living", label: "客厅装框", title: "客厅挂画效果" },
   { id: "gallery", label: "展馆装框", title: "展馆展陈效果" },
 ];
+
+const formatNotes = {
+  中堂: "竖向大幅，适合厅堂、书房或展厅主墙，正文居中，四周留白充足。",
+  条幅: "竖向窄幅，适合单独悬挂或成组展示，强调行气贯通和纵向节奏。",
+  横幅: "横向展开，适合沙发背景墙、会议室或展览横墙，左右留白需要均衡。",
+  对联: "左右两条成组展示，适合门厅、展馆入口或节庆陈设，重在上下联呼应。",
+  扇面: "扇形小品，适合雅集、文创展示和收藏陈设，文字宜疏密有致。",
+};
 
 const presets = [
   { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "横幅" },
@@ -56,11 +65,11 @@ export default function Home() {
   const [form, setForm] = useState(defaultForm);
   const [artwork, setArtwork] = useState(null);
   const [generateLoading, setGenerateLoading] = useState(false);
-  const [layoutAdvice, setLayoutAdvice] = useState(null);
-  const [layoutLoading, setLayoutLoading] = useState(false);
   const [works, setWorks] = useState([]);
   const [notice, setNotice] = useState("");
   const [displayMode, setDisplayMode] = useState("artwork");
+  const [sceneImages, setSceneImages] = useState({});
+  const [sceneLoading, setSceneLoading] = useState("");
 
   const selectedSummary = useMemo(() => {
     return `${form.script} · ${form.master} · ${form.format}`;
@@ -117,6 +126,8 @@ export default function Home() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "作品生成接口请求失败");
       setArtwork(data);
+      setSceneImages({});
+      setDisplayMode("artwork");
       if (data.localMissingChars?.length > 0) {
         setNotice(`褚遂良本地字库暂缺：${data.localMissingChars.join("、")}，本次已回退图片模型生成。`);
       } else if (data.provider === "local-chusuiliang-kaishu") {
@@ -130,26 +141,6 @@ export default function Home() {
       setNotice(error.message);
     } finally {
       setGenerateLoading(false);
-    }
-  }
-
-  async function requestLayoutAdvice(event) {
-    event.preventDefault();
-    setLayoutLoading(true);
-    setNotice("");
-    try {
-      const response = await fetch("/api/layout-advice", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: form.text, format: form.format }),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "章法接口请求失败");
-      setLayoutAdvice(data.advice);
-    } catch (error) {
-      setNotice(error.message);
-    } finally {
-      setLayoutLoading(false);
     }
   }
 
@@ -169,8 +160,9 @@ export default function Home() {
       master: preset.master,
       format: preset.format,
     });
-    setLayoutAdvice(null);
     setArtwork(null);
+    setSceneImages({});
+    setDisplayMode("artwork");
   }
 
   function applyWork(work) {
@@ -183,7 +175,40 @@ export default function Home() {
       format,
     });
     setArtwork({ imageUrl: work.imageUrl, prompt: work.prompt });
+    setSceneImages({});
+    setDisplayMode("artwork");
   }
+
+  async function generateScene(mode) {
+    if (!artwork?.imageUrl || mode === "artwork" || sceneImages[mode] || sceneLoading) return;
+    setSceneLoading(mode);
+    setNotice("");
+    try {
+      const response = await fetch("/api/generate-display-scene", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: artwork?.text || artwork?.work?.inputText || form.text,
+          script: artwork?.script || form.script,
+          master: artwork?.master || form.master,
+          format: artwork?.format || form.format,
+          imageUrl: artwork.imageUrl,
+          sceneMode: mode,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "装框效果图生成失败");
+      setSceneImages((current) => ({ ...current, [mode]: data }));
+    } catch (error) {
+      setNotice(error.message);
+    } finally {
+      setSceneLoading("");
+    }
+  }
+
+  useEffect(() => {
+    generateScene(displayMode);
+  }, [displayMode, artwork?.imageUrl]);
 
   return (
     <main>
@@ -224,7 +249,7 @@ export default function Home() {
           </div>
         </article>
 
-        <div className="grid two">
+        <div className="grid single">
           <article className="panel">
             <div className="panelTitle">
               <BookOpenText size={20} />
@@ -250,38 +275,6 @@ export default function Home() {
               ))}
             </div>
             <div className="answerBox">{answer || "回答会显示在这里。可咨询碑帖选择、书体特点、临摹路径、笔法章法等问题。"}</div>
-          </article>
-
-          <article className="panel">
-            <div className="panelTitle">
-              <LayoutTemplate size={20} />
-              <h2>章法设计</h2>
-            </div>
-            <form onSubmit={requestLayoutAdvice} className="stack">
-              <div className="inlineFields">
-                <label>
-                  创作文字
-                  <input value={form.text} onChange={(event) => updateForm("text", event.target.value)} />
-                </label>
-                <label>
-                  作品形式
-                  <select value={form.format} onChange={(event) => updateForm("format", event.target.value)}>
-                    {formats.map((item) => (
-                      <option key={item}>{item}</option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <button type="submit" disabled={layoutLoading}>
-                <Sparkles size={18} />
-                {layoutLoading ? "生成中" : "生成章法建议"}
-              </button>
-            </form>
-            <Advice advice={layoutAdvice} />
-            <div className="hintBox">
-              <strong>当前章法预判</strong>
-              <span>{quickLayout}</span>
-            </div>
           </article>
         </div>
 
@@ -314,6 +307,7 @@ export default function Home() {
                   <option key={item}>{item}</option>
                 ))}
               </select>
+              <small className="fieldHint">{formatNotes[form.format]}</small>
             </label>
             <button type="submit" disabled={generateLoading}>
               <Sparkles size={18} />
@@ -332,14 +326,14 @@ export default function Home() {
             </div>
             <div>
               <strong>{form.format}</strong>
-              <span>{quickLayout}</span>
+              <span>{formatNotes[form.format]} {quickLayout}</span>
             </div>
           </div>
 
           <div className="displayToolbar">
             <div>
               <strong>展示效果</strong>
-              <span>生成后可切换原作、客厅装框或展馆展陈视图。</span>
+              <span>先生成作品，再用 Qwen 生成正常装框、客厅挂墙或展馆展陈效果图。</span>
             </div>
             <div className="displayTabs" role="tablist" aria-label="展示效果">
               {displayModes.map((mode) => (
@@ -360,6 +354,8 @@ export default function Home() {
               artwork={artwork}
               displayMode={displayMode}
               generateLoading={generateLoading}
+              sceneImage={sceneImages[displayMode]}
+              sceneLoading={sceneLoading === displayMode}
               selectedSummary={selectedSummary}
             />
             <div className="promptBox">
@@ -372,9 +368,9 @@ export default function Home() {
                 <span>展示：{displayModes.find((mode) => mode.id === displayMode)?.title}</span>
               </div>
               <h3>图片生成提示词</h3>
-              <p>{artwork?.prompt || "生成后将在这里显示自动组合的图片提示词，后续可直接传给真实图片模型。"}</p>
+              <p>{sceneImages[displayMode]?.prompt || artwork?.prompt || "生成后将在这里显示自动组合的图片提示词，后续可直接传给真实图片模型。"}</p>
               {artwork?.imageUrl && (
-                <a className="download" href={artwork.imageUrl} download={`墨韵智创-${artwork?.work?.inputText || form.text}.png`}>
+                <a className="download" href={sceneImages[displayMode]?.imageUrl || artwork.imageUrl} download={`墨韵智创-${artwork?.work?.inputText || form.text}.png`}>
                   <Download size={18} />
                   下载图片
                 </a>
@@ -410,7 +406,7 @@ export default function Home() {
   );
 }
 
-function ArtworkPreview({ artwork, displayMode, generateLoading, selectedSummary }) {
+function ArtworkPreview({ artwork, displayMode, generateLoading, sceneImage, sceneLoading, selectedSummary }) {
   if (generateLoading) {
     return (
       <div className="artPreview">
@@ -442,56 +438,33 @@ function ArtworkPreview({ artwork, displayMode, generateLoading, selectedSummary
     );
   }
 
-  return (
-    <div className={`scenePreview ${displayMode === "gallery" ? "galleryScene" : "livingScene"}`}>
-      <div className="sceneWall">
-        <div className="spotlight left" />
-        <div className="spotlight right" />
-        <div className="frameMount">
-          <div className="frameMat">
-            <img src={artwork.imageUrl} alt="装框后的书法作品效果" />
-          </div>
-        </div>
-        <div className="sceneLabel">
-          <Frame size={15} />
-          {displayMode === "gallery" ? "展馆展陈预览" : "客厅挂画预览"}
+  if (sceneLoading) {
+    return (
+      <div className="artPreview sceneArtPreview">
+        <div className="generating">
+          <Frame size={26} />
+          <strong>正在生成真实装框效果</strong>
+          <span>Qwen 会重新绘制场景图，通常需要数秒到几十秒。</span>
         </div>
       </div>
-      <div className="sceneFloor">
-        {displayMode === "gallery" ? (
-          <div className="galleryBench" />
-        ) : (
-          <>
-            <div className="livingSofa" />
-            <div className="sideTable" />
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function Advice({ advice }) {
-  if (!advice) {
-    return <div className="answerBox">章法建议会包含字距、行距、落款位置、印章位置和整体布局。</div>;
+    );
   }
 
-  const rows = [
-    ["字距", advice.charSpacing],
-    ["行距", advice.lineSpacing],
-    ["落款", advice.signature],
-    ["印章", advice.seal],
-    ["整体", advice.overall],
-  ];
+  if (sceneImage?.imageUrl) {
+    return (
+      <div className="artPreview sceneArtPreview">
+        <img src={sceneImage.imageUrl} alt={`${sceneImage.sceneName || "装框"}效果图`} />
+      </div>
+    );
+  }
 
   return (
-    <dl className="adviceList">
-      {rows.map(([label, value]) => (
-        <div key={label}>
-          <dt>{label}</dt>
-          <dd>{value}</dd>
-        </div>
-      ))}
-    </dl>
+    <div className="artPreview sceneArtPreview">
+      <div className="generating">
+        <Frame size={26} />
+        <strong>准备生成装框效果</strong>
+        <span>请选择装框模式，系统会调用 Qwen 生成真实感展示图。</span>
+      </div>
+    </div>
   );
 }
