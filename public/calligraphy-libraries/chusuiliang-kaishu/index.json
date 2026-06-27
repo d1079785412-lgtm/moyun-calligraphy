@@ -81044,5 +81044,19 @@
     "width": 314,
     "height": 320,
     "status": "candidate"
+  },
+  {
+    "id": "manual_lv",
+    "char": "綠",
+    "source": "手工补字-截图",
+    "sourcePdf": "微信截图-绿",
+    "page": null,
+    "columnLtr": null,
+    "columnRtl": null,
+    "row": null,
+    "glyphUrl": "/calligraphy-libraries/chusuiliang-kaishu/glyphs/manual_lv.png",
+    "width": 247,
+    "height": 254,
+    "status": "manual"
   }
 ]
