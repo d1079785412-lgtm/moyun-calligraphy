@@ -9,32 +9,29 @@ const scriptMasterMap = {
   隶书: "曹全碑",
   篆书: "铁线篆",
 };
-const formats = ["中堂", "条幅", "横幅", "对联"];
+const formats = ["中堂", "对联", "条幅"];
 
 const formatMaxChars = {
   中堂: 50,
   条幅: 50,
-  横幅: 50,
   对联: 50,
 };
 
 const defaultCharsPerLine = {
   中堂: 8,
   条幅: 10,
-  横幅: 12,
   对联: 7,
 };
 
 const formatNotes = {
   中堂: "竖向大幅，适合厅堂、书房或展厅主墙，正文居中，四周留白充足。",
   条幅: "竖向窄幅，适合单独悬挂或成组展示，强调行气贯通和纵向节奏。",
-  横幅: "横向展开，适合沙发背景墙、会议室或展览横墙，左右留白需要均衡。",
   对联: "左右两条成组展示，适合门厅、展馆入口或节庆陈设，重在上下联呼应。",
 };
 
 const presets = [
-  { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "横幅" },
-  { label: "曹碑横幅", text: "福寿康宁", script: "隶书", master: "曹全碑", format: "横幅" },
+  { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "条幅" },
+  { label: "曹碑条幅", text: "福寿康宁", script: "隶书", master: "曹全碑", format: "条幅" },
   { label: "清篆", text: "清风入怀", script: "篆书", master: "铁线篆", format: "条幅" },
 ];
 
@@ -42,7 +39,7 @@ const questionExamples = [
   "褚遂良楷书临摹时先看什么？",
   "曹全碑隶书的波磔怎么观察？",
   "铁线篆适合写什么内容？",
-  "横幅作品落款和印章怎么安排？",
+  "作品落款和印章怎么安排？",
 ];
 
 const keywordSuggestions = ["春风", "明月", "山水", "松竹", "清泉", "归舟", "故园", "花影", "秋声", "云岫", "墨香", "禅意"];
@@ -95,7 +92,6 @@ export default function Home() {
   const quickLayout = useMemo(() => {
     const count = Array.from(form.text || "").filter((char) => char !== "\n").length;
     if (form.format === "对联") return "右联起笔、左联收束，左右字数和重心尽量一致，落款置左联外侧。";
-    if (form.format === "横幅") return "横向展开，左右留白均衡，落款宜放左侧或左下。";
     if (count <= 4) return "正文居中，字距略放宽，四周留白多一些更显雅致。";
     return "可按语义分行，行距略大于字距，落款与印章形成左下呼应。";
   }, [form]);
