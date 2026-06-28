@@ -35,7 +35,7 @@ const formatNotes = {
 const presets = [
   { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "横幅" },
   { label: "曹碑横幅", text: "福寿康宁", script: "隶书", master: "曹全碑", format: "横幅" },
-  { label: "铁线篆", text: "清风入怀", script: "篆书", master: "铁线篆", format: "条幅" },
+  { label: "清篆", text: "清风入怀", script: "篆书", master: "铁线篆", format: "条幅" },
 ];
 
 const questionExamples = [
@@ -314,7 +314,7 @@ export default function Home() {
         <article className="panel quickStart">
           <div className="panelTitle">
             <Wand2 size={20} />
-            <h2>创作入口</h2>
+            <h2>创作推荐</h2>
           </div>
           <div className="presetGrid">
             {presets.map((preset) => (
@@ -328,6 +328,35 @@ export default function Home() {
             ))}
           </div>
         </article>
+
+        <div className="grid single">
+          <article className="panel">
+            <div className="panelTitle">
+              <BookOpenText size={20} />
+              <h2>书法知识问答</h2>
+            </div>
+            <form onSubmit={submitChat} className="stack">
+              <textarea
+                value={question}
+                onChange={(event) => setQuestion(event.target.value)}
+                rows={4}
+                placeholder="输入书法史、书体、碑帖、名家、技法、章法、临摹方法等问题"
+              />
+              <button type="submit" disabled={chatLoading}>
+                <Send size={18} />
+                {chatLoading ? "思考中" : "提交问题"}
+              </button>
+            </form>
+            <div className="chips">
+              {questionExamples.map((item) => (
+                <button key={item} type="button" className="chip" onClick={() => setQuestion(item)}>
+                  {item}
+                </button>
+              ))}
+            </div>
+            <div className="answerBox">{answer || "回答会显示在这里。可咨询碑帖选择、书体特点、临摹路径、笔法章法等问题。"}</div>
+          </article>
+        </div>
 
         <article className="panel inspiration">
           <div className="panelTitle">
@@ -386,35 +415,6 @@ export default function Home() {
             </div>
           </div>
         </article>
-
-        <div className="grid single">
-          <article className="panel">
-            <div className="panelTitle">
-              <BookOpenText size={20} />
-              <h2>书法知识问答</h2>
-            </div>
-            <form onSubmit={submitChat} className="stack">
-              <textarea
-                value={question}
-                onChange={(event) => setQuestion(event.target.value)}
-                rows={4}
-                placeholder="输入书法史、书体、碑帖、名家、技法、章法、临摹方法等问题"
-              />
-              <button type="submit" disabled={chatLoading}>
-                <Send size={18} />
-                {chatLoading ? "思考中" : "提交问题"}
-              </button>
-            </form>
-            <div className="chips">
-              {questionExamples.map((item) => (
-                <button key={item} type="button" className="chip" onClick={() => setQuestion(item)}>
-                  {item}
-                </button>
-              ))}
-            </div>
-            <div className="answerBox">{answer || "回答会显示在这里。可咨询碑帖选择、书体特点、临摹路径、笔法章法等问题。"}</div>
-          </article>
-        </div>
 
         <article className="panel generator">
           <div className="panelTitle">
