@@ -9,14 +9,13 @@ const scriptMasterMap = {
   隶书: "曹全碑",
   篆书: "铁线篆",
 };
-const formats = ["中堂", "条幅", "横幅", "对联", "扇面"];
+const formats = ["中堂", "条幅", "横幅", "对联"];
 
 const formatMaxChars = {
   中堂: 50,
   条幅: 50,
   横幅: 50,
   对联: 50,
-  扇面: 8,
 };
 
 const defaultCharsPerLine = {
@@ -24,7 +23,6 @@ const defaultCharsPerLine = {
   条幅: 10,
   横幅: 12,
   对联: 7,
-  扇面: 8,
 };
 
 const formatNotes = {
@@ -32,7 +30,6 @@ const formatNotes = {
   条幅: "竖向窄幅，适合单独悬挂或成组展示，强调行气贯通和纵向节奏。",
   横幅: "横向展开，适合沙发背景墙、会议室或展览横墙，左右留白需要均衡。",
   对联: "左右两条成组展示，适合门厅、展馆入口或节庆陈设，重在上下联呼应。",
-  扇面: "扇形小品，适合雅集、文创展示和收藏陈设，文字宜疏密有致。",
 };
 
 const presets = [

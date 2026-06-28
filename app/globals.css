@@ -1,12 +1,12 @@
 :root {
-  --paper: #f5efe2;
-  --paper-deep: #eadfc9;
-  --ink: #171310;
-  --ink-soft: #4a4038;
-  --line: #d7c7aa;
-  --seal: #a3261d;
-  --seal-dark: #7e1b15;
-  --white: #fffaf0;
+  --paper: #ffffff;
+  --paper-deep: #ffffff;
+  --ink: #000000;
+  --ink-soft: rgba(0, 0, 0, 0.66);
+  --line: rgba(0, 0, 0, 0.22);
+  --seal: #000000;
+  --seal-dark: #000000;
+  --white: #ffffff;
 }
 
 * {
@@ -20,7 +20,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-family: Inter, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
   letter-spacing: 0;
 }
 
@@ -36,7 +36,7 @@ a.download {
   align-items: center;
   background: var(--ink);
   border: 1px solid var(--ink);
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--white);
   cursor: pointer;
   display: inline-flex;
@@ -50,7 +50,8 @@ a.download {
 
 button:hover,
 a.download:hover {
-  background: #2d251f;
+  background: var(--white);
+  color: var(--ink);
 }
 
 button:active,
@@ -66,9 +67,9 @@ button:disabled {
 input,
 select,
 textarea {
-  background: rgba(255, 250, 240, 0.82);
+  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--ink);
   outline: none;
   padding: 11px 12px;
@@ -98,10 +99,8 @@ label {
 }
 
 .hero {
-  background:
-    linear-gradient(90deg, rgba(245, 239, 226, 0.96), rgba(245, 239, 226, 0.82)),
-    repeating-linear-gradient(90deg, rgba(128, 89, 44, 0.08) 0 1px, transparent 1px 46px);
-  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  border-bottom: 2px solid var(--ink);
 }
 
 .heroInner {
@@ -118,9 +117,9 @@ label {
 .sealMark {
   align-items: center;
   background: var(--seal);
-  color: #f9ead7;
+  color: var(--white);
   display: flex;
-  font-family: KaiTi, STKaiti, serif;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
   font-size: 74px;
   height: 132px;
   justify-content: center;
@@ -129,7 +128,7 @@ label {
 }
 
 .eyebrow {
-  color: var(--seal-dark);
+  color: var(--ink);
   font-size: 15px;
   margin: 0 0 14px;
 }
@@ -151,8 +150,8 @@ h1 {
 
 .intro {
   color: var(--ink-soft);
-  font-size: 19px;
-  line-height: 1.8;
+  font-size: 18px;
+  line-height: 1.65;
   margin-bottom: 0;
   max-width: 720px;
 }
@@ -165,10 +164,10 @@ h1 {
 }
 
 .heroBadges span {
-  background: rgba(255, 250, 240, 0.72);
-  border: 1px solid rgba(163, 38, 29, 0.28);
-  border-radius: 6px;
-  color: var(--seal-dark);
+  background: var(--white);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
   padding: 8px 12px;
 }
 
@@ -192,9 +191,9 @@ h1 {
 }
 
 .panel {
-  background: rgba(255, 250, 240, 0.72);
+  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   padding: 22px;
 }
 
@@ -226,8 +225,8 @@ h1 {
 
 .presetCard {
   align-items: start;
-  background: rgba(255, 250, 240, 0.72);
-  border-color: rgba(215, 199, 170, 0.9);
+  background: var(--white);
+  border-color: var(--line);
   color: var(--ink);
   display: grid;
   gap: 7px;
@@ -239,10 +238,11 @@ h1 {
 
 .presetCard:hover {
   background: var(--white);
+  border-color: var(--ink);
 }
 
 .presetCard strong {
-  color: var(--seal-dark);
+  color: var(--ink);
   font-size: 17px;
 }
 
@@ -278,9 +278,9 @@ h1 {
 
 .answerBox,
 .promptBox {
-  background: rgba(234, 223, 201, 0.45);
-  border: 1px solid rgba(215, 199, 170, 0.76);
-  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
   color: var(--ink-soft);
   line-height: 1.8;
   margin-top: 16px;
@@ -304,7 +304,8 @@ h1 {
 }
 
 .chip:hover {
-  background: rgba(234, 223, 201, 0.55);
+  background: var(--white);
+  border-color: var(--ink);
   color: var(--ink);
 }
 
@@ -357,7 +358,7 @@ h1 {
 }
 
 .hintBox {
-  background: rgba(255, 250, 240, 0.72);
+  background: var(--white);
   border-left: 3px solid var(--seal);
   color: var(--ink-soft);
   display: grid;
@@ -379,9 +380,9 @@ h1 {
 }
 
 .selectionNotes div {
-  background: rgba(234, 223, 201, 0.34);
-  border: 1px solid rgba(215, 199, 170, 0.72);
-  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
   display: grid;
   gap: 6px;
   padding: 12px;
@@ -398,9 +399,9 @@ h1 {
 
 .displayToolbar {
   align-items: center;
-  background: rgba(255, 250, 240, 0.68);
-  border: 1px solid rgba(215, 199, 170, 0.76);
-  border-radius: 8px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
   display: flex;
   gap: 16px;
   justify-content: space-between;
@@ -423,9 +424,9 @@ h1 {
 }
 
 .displayTabs {
-  background: rgba(234, 223, 201, 0.62);
-  border: 1px solid rgba(215, 199, 170, 0.88);
-  border-radius: 8px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(86px, 1fr));
   padding: 4px;
@@ -434,14 +435,14 @@ h1 {
 .displayTab {
   background: transparent;
   border: 0;
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--ink-soft);
   min-height: 36px;
   padding: 7px 10px;
 }
 
 .displayTab:hover {
-  background: rgba(255, 250, 240, 0.7);
+  background: var(--white);
   color: var(--ink);
 }
 
@@ -451,10 +452,10 @@ h1 {
 }
 
 .notice {
-  background: #fff3ed;
-  border: 1px solid #dfb5a8;
-  border-radius: 6px;
-  color: var(--seal-dark);
+  background: var(--white);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
   padding: 12px 14px;
 }
 
@@ -467,9 +468,9 @@ h1 {
 
 .artPreview {
   align-items: center;
-  background: #efe3cd;
+  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   min-height: 430px;
@@ -485,9 +486,7 @@ h1 {
 }
 
 .sceneArtPreview {
-  background:
-    linear-gradient(180deg, rgba(255, 250, 240, 0.8), rgba(234, 223, 201, 0.76)),
-    repeating-linear-gradient(90deg, rgba(128, 89, 44, 0.08) 0 1px, transparent 1px 46px);
+  background: var(--white);
 }
 
 .emptyArt {
@@ -501,7 +500,7 @@ h1 {
 .emptyArt span {
   border: 2px solid var(--seal);
   color: var(--seal);
-  font-family: KaiTi, STKaiti, serif;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
   font-size: 76px;
   height: 122px;
   line-height: 116px;
@@ -519,8 +518,8 @@ h1 {
 }
 
 .errorArt span {
-  border-color: #b44731;
-  color: #b44731;
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .errorArt p {
@@ -568,9 +567,9 @@ h1 {
 }
 
 .metaGrid span {
-  background: rgba(255, 250, 240, 0.7);
-  border: 1px solid rgba(215, 199, 170, 0.7);
-  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
   color: var(--ink-soft);
   padding: 8px 10px;
 }
@@ -586,9 +585,9 @@ h1 {
 }
 
 .workCard {
-  background: rgba(255, 250, 240, 0.78);
+  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--ink);
   display: grid;
   gap: 8px;
@@ -605,8 +604,8 @@ h1 {
 .workCard img {
   aspect-ratio: 4 / 5;
   background: var(--paper-deep);
-  border: 1px solid rgba(215, 199, 170, 0.8);
-  border-radius: 5px;
+  border: 1px solid var(--line);
+  border-radius: 0;
   object-fit: cover;
   width: 100%;
 }
