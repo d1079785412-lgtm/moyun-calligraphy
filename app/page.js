@@ -413,7 +413,7 @@ export default function Home() {
             <textarea
               value={poemText}
               onChange={(event) => setPoemText(event.target.value)}
-              placeholder="生成后的正文会显示为两行，中间用逗号分开，也可以手动修改。"
+              placeholder="生成后的正文会显示在这里"
             />
             <div className="poemActions">
               <span>{poemPlainText().length}/{poemMaxChars()} 字</span>
