@@ -14,6 +14,8 @@ services:
         value: https://api.deepseek.com
       - key: TEXT_MODEL_NAME
         value: deepseek-chat
+      - key: POEM_MODEL_NAME
+        value: deepseek-v4-pro
       - key: IMAGE_MODEL_PROVIDER
         value: qwen
       - key: IMAGE_MODEL_BASE_URL

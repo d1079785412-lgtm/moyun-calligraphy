@@ -177,21 +177,38 @@ export default function Home() {
     return [...selectedKeywords, ...customKeywords.split(/[，,、\s]+/)]
       .map((item) => item.trim())
       .filter(Boolean)
+      .slice(0, 3)
       .join("，");
   }
 
   function toggleKeyword(keyword) {
-    setSelectedKeywords((current) => (
-      current.includes(keyword) ? current.filter((item) => item !== keyword) : [...current, keyword]
-    ));
+    setSelectedKeywords((current) => {
+      if (current.includes(keyword)) return current.filter((item) => item !== keyword);
+      if (current.length >= 3) {
+        setNotice("关键词最多选择三个。");
+        return current;
+      }
+      return [...current, keyword];
+    });
   }
 
   function poemLineSize(genre = poemGenre) {
     return genre === "七言绝句" ? 7 : 5;
   }
 
+  function poemMaxChars(genre = poemGenre) {
+    return genre === "七言绝句" ? 28 : 20;
+  }
+
+  function poemPlainText(text = poemText) {
+    return Array.from(text || "")
+      .filter((char) => /\p{Script=Han}/u.test(char))
+      .slice(0, poemMaxChars())
+      .join("");
+  }
+
   function poemForm(text = poemText) {
-    const safeText = Array.from(text || "").slice(0, poemGenre === "七言绝句" ? 28 : 20).join("");
+    const safeText = poemPlainText(text);
     const nextFormat = safeText.length > (formatMaxChars[form.format] || 50) ? "条幅" : form.format;
     return {
       ...form,
@@ -376,7 +393,7 @@ export default function Home() {
               <input
                 value={customKeywords}
                 onChange={(event) => setCustomKeywords(event.target.value)}
-                placeholder="自定义关键词，可用空格或逗号分隔"
+                placeholder="自定义关键词，可用空格或逗号分隔，最多取三个"
               />
             </div>
             <label>
@@ -395,12 +412,11 @@ export default function Home() {
           <div className="poemResult">
             <textarea
               value={poemText}
-              onChange={(event) => setPoemText(Array.from(event.target.value || "").filter((char) => char !== "\n").slice(0, poemGenre === "七言绝句" ? 28 : 20).join(""))}
-              placeholder="生成后的 20-28 字正文会显示在这里，也可以手动修改。"
-              maxLength={poemGenre === "七言绝句" ? 28 : 20}
+              onChange={(event) => setPoemText(event.target.value)}
+              placeholder="生成后的正文会显示为两行，中间用逗号分开，也可以手动修改。"
             />
             <div className="poemActions">
-              <span>{Array.from(poemText || "").length}/{poemGenre === "七言绝句" ? 28 : 20} 字</span>
+              <span>{poemPlainText().length}/{poemMaxChars()} 字</span>
               <button type="button" className="secondary" onClick={applyPoemText} disabled={!poemText.trim()}>
                 套用文字
               </button>
