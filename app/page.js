@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BookOpenText, Download, History, ImagePlus, Send, Sparkles, Wand2 } from "lucide-react";
+import { BookOpenText, Download, Feather, History, ImagePlus, Send, Sparkles, Wand2 } from "lucide-react";
 
 const scripts = ["楷书", "隶书", "篆书"];
 const scriptMasterMap = {
@@ -48,6 +48,9 @@ const questionExamples = [
   "横幅作品落款和印章怎么安排？",
 ];
 
+const keywordSuggestions = ["春风", "明月", "山水", "松竹", "清泉", "归舟", "故园", "花影", "秋声", "云岫", "墨香", "禅意"];
+const poemGenres = ["五言绝句", "七言绝句"];
+
 const scriptNotes = {
   楷书: "固定褚遂良，清劲秀逸，结体疏朗。",
   隶书: "固定曹全碑，扁方舒展，秀润古雅。",
@@ -76,6 +79,11 @@ export default function Home() {
   const [artwork, setArtwork] = useState(null);
   const [generationError, setGenerationError] = useState("");
   const [generateLoading, setGenerateLoading] = useState(false);
+  const [selectedKeywords, setSelectedKeywords] = useState(["明月", "清泉"]);
+  const [customKeywords, setCustomKeywords] = useState("");
+  const [poemGenre, setPoemGenre] = useState("五言绝句");
+  const [poemText, setPoemText] = useState("");
+  const [poemLoading, setPoemLoading] = useState(false);
   const [works, setWorks] = useState([]);
   const [notice, setNotice] = useState("");
 
@@ -125,25 +133,21 @@ export default function Home() {
     }
   }
 
-  async function generateArtwork(event) {
-    event.preventDefault();
-    if (!isCouplet && !form.charsPerLine) {
-      setForm((current) => ({ ...current, charsPerLine: 1 }));
-    }
+  async function requestArtwork(payload) {
     setGenerateLoading(true);
     setNotice("");
     setGenerationError("");
     setArtwork(null);
     try {
-      const textCount = Array.from(form.text || "").filter((char) => char !== "\n").length;
-      const payload = {
-        ...form,
-        charsPerLine: isCouplet ? Math.max(1, Math.floor(textCount / 2)) : form.charsPerLine || 1,
+      const textCount = Array.from(payload.text || "").filter((char) => char !== "\n").length;
+      const nextPayload = {
+        ...payload,
+        charsPerLine: payload.format === "对联" ? Math.max(1, Math.floor(textCount / 2)) : payload.charsPerLine || 1,
       };
       const response = await fetch("/api/generate-calligraphy", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(nextPayload),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "作品生成接口请求失败");
@@ -163,6 +167,79 @@ export default function Home() {
     } finally {
       setGenerateLoading(false);
     }
+  }
+
+  async function generateArtwork(event) {
+    event.preventDefault();
+    if (!isCouplet && !form.charsPerLine) {
+      setForm((current) => ({ ...current, charsPerLine: 1 }));
+    }
+    await requestArtwork({
+      ...form,
+      charsPerLine: isCouplet ? form.charsPerLine : form.charsPerLine || 1,
+    });
+  }
+
+  function keywordText() {
+    return [...selectedKeywords, ...customKeywords.split(/[，,、\s]+/)]
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .join("，");
+  }
+
+  function toggleKeyword(keyword) {
+    setSelectedKeywords((current) => (
+      current.includes(keyword) ? current.filter((item) => item !== keyword) : [...current, keyword]
+    ));
+  }
+
+  function poemLineSize(genre = poemGenre) {
+    return genre === "七言绝句" ? 7 : 5;
+  }
+
+  function poemForm(text = poemText) {
+    const safeText = Array.from(text || "").slice(0, poemGenre === "七言绝句" ? 28 : 20).join("");
+    const nextFormat = safeText.length > (formatMaxChars[form.format] || 50) ? "条幅" : form.format;
+    return {
+      ...form,
+      text: safeText,
+      format: nextFormat,
+      charsPerLine: poemLineSize(),
+    };
+  }
+
+  async function submitPoem(event) {
+    event.preventDefault();
+    setPoemLoading(true);
+    setNotice("");
+    try {
+      const response = await fetch("/api/poem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keywords: keywordText(), genre: poemGenre }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "成诗接口请求失败");
+      setPoemText(data.text || "");
+      setForm(poemForm(data.text || ""));
+    } catch (error) {
+      setNotice(error.message);
+    } finally {
+      setPoemLoading(false);
+    }
+  }
+
+  function applyPoemText() {
+    if (!poemText.trim()) return;
+    setForm(poemForm());
+    setArtwork(null);
+  }
+
+  async function generatePoemArtwork() {
+    if (!poemText.trim()) return;
+    const nextForm = poemForm();
+    setForm(nextForm);
+    await requestArtwork(nextForm);
   }
 
   function updateForm(field, value) {
@@ -252,6 +329,64 @@ export default function Home() {
                 </small>
               </button>
             ))}
+          </div>
+        </article>
+
+        <article className="panel inspiration">
+          <div className="panelTitle">
+            <Feather size={20} />
+            <h2>关键词成诗</h2>
+          </div>
+          <form onSubmit={submitPoem} className="poemComposer">
+            <div className="keywordArea">
+              <div className="chips keywordChips">
+                {keywordSuggestions.map((keyword) => (
+                  <button
+                    key={keyword}
+                    type="button"
+                    className={`chip ${selectedKeywords.includes(keyword) ? "active" : ""}`}
+                    onClick={() => toggleKeyword(keyword)}
+                  >
+                    {keyword}
+                  </button>
+                ))}
+              </div>
+              <input
+                value={customKeywords}
+                onChange={(event) => setCustomKeywords(event.target.value)}
+                placeholder="自定义关键词，可用空格或逗号分隔"
+              />
+            </div>
+            <label>
+              体裁
+              <select value={poemGenre} onChange={(event) => setPoemGenre(event.target.value)}>
+                {poemGenres.map((genre) => (
+                  <option key={genre}>{genre}</option>
+                ))}
+              </select>
+            </label>
+            <button type="submit" disabled={poemLoading}>
+              <Sparkles size={18} />
+              {poemLoading ? "生成中" : "一键成诗"}
+            </button>
+          </form>
+          <div className="poemResult">
+            <textarea
+              value={poemText}
+              onChange={(event) => setPoemText(Array.from(event.target.value || "").filter((char) => char !== "\n").slice(0, poemGenre === "七言绝句" ? 28 : 20).join(""))}
+              placeholder="生成后的 20-28 字正文会显示在这里，也可以手动修改。"
+              maxLength={poemGenre === "七言绝句" ? 28 : 20}
+            />
+            <div className="poemActions">
+              <span>{Array.from(poemText || "").length}/{poemGenre === "七言绝句" ? 28 : 20} 字</span>
+              <button type="button" className="secondary" onClick={applyPoemText} disabled={!poemText.trim()}>
+                套用文字
+              </button>
+              <button type="button" onClick={generatePoemArtwork} disabled={!poemText.trim() || generateLoading}>
+                <ImagePlus size={18} />
+                一键生成作品
+              </button>
+            </div>
           </div>
         </article>
 

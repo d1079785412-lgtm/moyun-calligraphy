@@ -308,6 +308,54 @@ h1 {
   color: var(--ink);
 }
 
+.chip.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.poemComposer {
+  align-items: end;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(280px, 1fr) minmax(140px, 0.24fr) auto;
+}
+
+.keywordArea {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.keywordChips {
+  margin-top: 0;
+}
+
+.poemResult {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.poemResult textarea {
+  font-size: 22px;
+  min-height: 86px;
+  text-align: center;
+}
+
+.poemActions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.poemActions span {
+  color: var(--ink-soft);
+  margin-right: auto;
+}
+
 .hintBox {
   background: rgba(255, 250, 240, 0.72);
   border-left: 3px solid var(--seal);
@@ -576,6 +624,7 @@ h1 {
   .grid.two,
   .resultGrid,
   .generateForm,
+  .poemComposer,
   .selectionNotes {
     grid-template-columns: 1fr;
   }
@@ -631,6 +680,24 @@ h1 {
 
   .displayTabs {
     grid-template-columns: 1fr;
+  }
+
+  .keywordChips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .keywordChips .chip {
+    white-space: nowrap;
+  }
+
+  .poemActions {
+    justify-content: stretch;
+  }
+
+  .poemActions button {
+    flex: 1 1 150px;
   }
 
 }
