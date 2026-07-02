@@ -3,11 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { BookOpenText, Download, Feather, History, ImagePlus, Send, Sparkles, Wand2 } from "lucide-react";
 
-const scripts = ["楷书", "隶书", "篆书"];
+const scripts = ["楷书", "隶书"];
 const scriptMasterMap = {
   楷书: "褚遂良",
   隶书: "曹全碑",
-  篆书: "铁线篆",
 };
 const formats = ["中堂", "对联", "条幅"];
 
@@ -32,13 +31,11 @@ const formatNotes = {
 const presets = [
   { label: "褚楷雅句", text: "静以修身", script: "楷书", master: "褚遂良", format: "条幅" },
   { label: "曹碑条幅", text: "福寿康宁", script: "隶书", master: "曹全碑", format: "条幅" },
-  { label: "清篆", text: "清风入怀", script: "篆书", master: "铁线篆", format: "条幅" },
 ];
 
 const questionExamples = [
   "褚遂良楷书临摹时先看什么？",
   "曹全碑隶书的波磔怎么观察？",
-  "铁线篆适合写什么内容？",
   "作品落款和印章怎么安排？",
 ];
 
@@ -48,13 +45,11 @@ const poemGenres = ["五言绝句", "七言绝句"];
 const scriptNotes = {
   楷书: "固定褚遂良，清劲秀逸，结体疏朗。",
   隶书: "固定曹全碑，扁方舒展，秀润古雅。",
-  篆书: "固定铁线篆，线条匀细，圆转精严。",
 };
 
 const masterNotes = {
   褚遂良: "只用于楷书，强调清劲、灵动、疏朗。",
   曹全碑: "只用于隶书，强调秀润、波磔、横势。",
-  铁线篆: "只用于篆书，强调匀净、圆转、修长。",
 };
 
 const defaultForm = {
